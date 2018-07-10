@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+  <classPathEntry location="C:/Users/11435/.m2/repository/mysql/mysql-connector-java/5.1.41/mysql-connector-java-5.1.41.jar"/>
+  <context id="context1">
+    <jdbcConnection connectionURL="jdbc:mysql://123.207.39.209:3306/monitorTest" driverClass="com.mysql.jdbc.Driver" password="hnzdjc@" userId="dba" />
+    <javaModelGenerator targetPackage="com.zd.manager.business.model" targetProject="Manager/src/main/java" />
+    <sqlMapGenerator targetPackage="mapper.business" targetProject="Manager/src/main/resources" />
+    <javaClientGenerator targetPackage="com.zd.manager.business.mapper" targetProject="Manager/src/main/java" type="XMLMAPPER" />
+    	<table tableName="project" domainObjectName="Project" enableCountByExample="false" enableUpdateByExample="false"
+        enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    	<table tableName="sensor" domainObjectName="Sensor" enableCountByExample="false" enableUpdateByExample="false"
+        enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    	<table tableName="statistic_chart" domainObjectName="StatisticChart" enableCountByExample="false" enableUpdateByExample="false"
+        enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    	<table tableName="sys_code" domainObjectName="SysCode" enableCountByExample="false" enableUpdateByExample="false"
+        enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    	<table tableName="sensor_data" domainObjectName="SensorData" enableCountByExample="false" enableUpdateByExample="false"
+        enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    	<table tableName="user_project" domainObjectName="UserProject" enableCountByExample="false" enableUpdateByExample="false"
+        enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    	<table tableName="terminals" domainObjectName="Terminals" enableCountByExample="false" enableUpdateByExample="false"
+        enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    	<table tableName="terminals_log" domainObjectName="TerminalsLog" enableCountByExample="false" enableUpdateByExample="false"
+        enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    	<table tableName="terminals_project" domainObjectName="TerminalsProject" enableCountByExample="false" enableUpdateByExample="false"
+        enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+  </context>
+</generatorConfiguration>

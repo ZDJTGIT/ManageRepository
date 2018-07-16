@@ -42,19 +42,17 @@ public class CachingConfiguration implements CachingConfigurer {
             LRU，Least Recently Used，最近最少使用的，缓存的元素有一个时间戳，当缓存容量满了，而又需要腾出地方来缓存新的元素的时候，那么现有缓存元素中时间戳离当前时间最远的元素将被清出缓存。
 	 */
 	public net.sf.ehcache.CacheManager ehCacheManager(){
-		CacheConfiguration demoCache = createCacheConfiguration("demo");
 		CacheConfiguration userCache = createCacheConfiguration("userCache");
 		CacheConfiguration roleCache = createCacheConfiguration("roleCache");
 		CacheConfiguration tokenCache = createCacheConfiguration("tokenCache");
 		CacheConfiguration permissionCache = createCacheConfiguration("permissionCache");
-		CacheConfiguration valiCodeCache = createCacheConfiguration("valiCodeCache");
+		CacheConfiguration userProjectCache = createCacheConfiguration("userProjectCache");
         net.sf.ehcache.config.Configuration config = new net.sf.ehcache.config.Configuration();
-        config.addCache(demoCache);
         config.addCache(userCache);
         config.addCache(roleCache);
         config.addCache(tokenCache);
         config.addCache(permissionCache);
-        config.addCache(valiCodeCache);
+        config.addCache(userProjectCache);
         return net.sf.ehcache.CacheManager.newInstance(config);
 	}
 	

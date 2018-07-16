@@ -3,6 +3,8 @@ package com.zd.manager.core.model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -14,8 +16,12 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  */
 @ApiModel
 @JsonInclude(Include.NON_NULL)
-public class Result<T> {
+public class Result<T> implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public static final Integer SUCCESS = 0;// 请求成功
 	public static final Integer FAILURE = 1;// 请求失败
 

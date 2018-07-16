@@ -20,7 +20,7 @@ public class FilterConfig {
 		//注入拦截器
 		registration.setFilter(new TokenFilter());
 		//拦截规则
-		registration.addUrlPatterns("/manager/*");
+		registration.addUrlPatterns("/*");
 		//过滤器名称
 		registration.setName("TokenFilter");
 		//是否自动注册

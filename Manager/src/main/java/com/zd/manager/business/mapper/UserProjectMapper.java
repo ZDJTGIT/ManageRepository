@@ -1,5 +1,8 @@
 package com.zd.manager.business.mapper;
 
+import java.util.List;
+
+import com.zd.manager.business.model.Project;
 import com.zd.manager.business.model.UserProject;
 
 public interface UserProjectMapper {
@@ -50,4 +53,17 @@ public interface UserProjectMapper {
      * @mbg.generated Tue Jul 10 10:42:30 CST 2018
      */
     int updateByPrimaryKey(UserProject record);
+    
+    /**
+     * 根据用户id查询项目
+     * @param userId
+     * @return
+     */
+    List<Project> queryProjectByUserId(Integer userId);
+    
+    /**
+     * 查询所有项目
+     * @return
+     */
+    List<UserProject> queryAll();
 }

@@ -119,4 +119,12 @@
       leader_flag = #{leaderFlag,jdbcType=BIT}
     where up_id = #{upId,jdbcType=INTEGER}
   </update>
+  <select id="queryProjectByUserId" parameterType="java.lang.Integer" resultType="com.zd.manager.business.model.Project">
+  	select * from project where project_id in (select project_id from user_project where user_id = #{userId,jdbcType=INTEGER})
+  </select>
+  <select id="queryAll" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List"/>
+  	from user_project
+  </select>
 </mapper>

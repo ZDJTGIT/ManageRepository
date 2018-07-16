@@ -183,4 +183,7 @@
     <include refid="Base_Column_List" />
     from user where user_name = #{name}
   </select>
+  <select id="queryAll" resultMap="BaseResultMap">
+  	select <include refid="Base_Column_List" /> from user
+  </select>
 </mapper>

@@ -201,4 +201,9 @@
       project_description = #{projectDescription,jdbcType=VARCHAR}
     where project_id = #{projectId,jdbcType=INTEGER}
   </update>
+  <select id="queryAll" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List"/>
+  	from project
+  </select>
 </mapper>

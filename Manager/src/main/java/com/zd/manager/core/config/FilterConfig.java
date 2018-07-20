@@ -4,7 +4,7 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.zd.manager.core.filter.TokenFilter;
+import com.zd.manager.core.filter.CorsFilter;
 
 /**
  * @author Kstar:
@@ -13,18 +13,19 @@ import com.zd.manager.core.filter.TokenFilter;
  */
 @Configuration
 public class FilterConfig {
-	
+
+	/**
+	 * 注册CorsFilter
+	 */
 	@Bean
-	public FilterRegistrationBean filterRegist(){
-		FilterRegistrationBean registration = new FilterRegistrationBean();
-		//注入拦截器
-		registration.setFilter(new TokenFilter());
-		//拦截规则
-		registration.addUrlPatterns("/*");
-		//过滤器名称
-		registration.setName("TokenFilter");
-		//是否自动注册
-		registration.setEnabled(true);
-		return registration;
+	public FilterRegistrationBean corsFilterRegistrationBean() {
+		FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
+		CorsFilter corsFilter = new CorsFilter();
+		filterRegistrationBean.setFilter(corsFilter);
+		filterRegistrationBean.addUrlPatterns("/*");
+		filterRegistrationBean.setName("corsFilter");
+		filterRegistrationBean.setOrder(1);
+		return filterRegistrationBean;
 	}
+
 }

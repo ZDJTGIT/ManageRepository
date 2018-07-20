@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zd.manager.business.mapper.TablenameMonitortypeMapper">
+  <resultMap id="BaseResultMap" type="com.zd.manager.business.model.TablenameMonitortype">
+    <id column="tablename_monitortype_id" jdbcType="INTEGER" property="tablenameMonitortypeId" />
+    <result column="monitor_type" jdbcType="INTEGER" property="monitorType" />
+    <result column="table_name" jdbcType="VARCHAR" property="tableName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    tablename_monitortype_id, monitor_type, table_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tablename_monitortype
+    where tablename_monitortype_id = #{tablenameMonitortypeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tablename_monitortype
+    where tablename_monitortype_id = #{tablenameMonitortypeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zd.manager.business.model.TablenameMonitortype">
+    insert into tablename_monitortype (tablename_monitortype_id, monitor_type, 
+      table_name)
+    values (#{tablenameMonitortypeId,jdbcType=INTEGER}, #{monitorType,jdbcType=INTEGER}, 
+      #{tableName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zd.manager.business.model.TablenameMonitortype">
+    insert into tablename_monitortype
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tablenameMonitortypeId != null">
+        tablename_monitortype_id,
+      </if>
+      <if test="monitorType != null">
+        monitor_type,
+      </if>
+      <if test="tableName != null">
+        table_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tablenameMonitortypeId != null">
+        #{tablenameMonitortypeId,jdbcType=INTEGER},
+      </if>
+      <if test="monitorType != null">
+        #{monitorType,jdbcType=INTEGER},
+      </if>
+      <if test="tableName != null">
+        #{tableName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zd.manager.business.model.TablenameMonitortype">
+    update tablename_monitortype
+    <set>
+      <if test="monitorType != null">
+        monitor_type = #{monitorType,jdbcType=INTEGER},
+      </if>
+      <if test="tableName != null">
+        table_name = #{tableName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where tablename_monitortype_id = #{tablenameMonitortypeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zd.manager.business.model.TablenameMonitortype">
+    update tablename_monitortype
+    set monitor_type = #{monitorType,jdbcType=INTEGER},
+      table_name = #{tableName,jdbcType=VARCHAR}
+    where tablename_monitortype_id = #{tablenameMonitortypeId,jdbcType=INTEGER}
+  </update>
+</mapper>

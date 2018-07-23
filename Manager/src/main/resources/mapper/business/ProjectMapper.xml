@@ -206,4 +206,8 @@
   	<include refid="Base_Column_List"/>
   	from project
   </select>
+  <select id="queryProjectIdByName" resultType="java.lang.Integer">
+  	select project_id from project where project_name in 
+  	<foreach collection="list" item="item" open="(" close=")" separator=",">#{item}</foreach>
+  </select>
 </mapper>

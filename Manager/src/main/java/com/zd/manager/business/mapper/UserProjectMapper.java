@@ -2,6 +2,8 @@ package com.zd.manager.business.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.zd.manager.business.model.Project;
 import com.zd.manager.business.model.UserProject;
 
@@ -66,4 +68,23 @@ public interface UserProjectMapper {
      * @return
      */
     List<UserProject> queryAll();
+    
+    /**
+     * 根据用户id查询用户已有的项目id
+     * @param userId
+     * @return
+     */
+    List<Project> queryNoProjectByUserId(Integer userId);
+    
+    /**
+     * 给指定用户名的用户添加项目
+     * @param userName
+     * @param projectNamesList
+     * @return
+     */
+	int addProjectsToUser(String userName, List<String> projectNamesList);
+
+	int deleteProject(@Param("userName")String userName, @Param("projectName")String projectName);
+
+	int deleteByUserId(Integer userId);
 }

@@ -58,4 +58,6 @@ public interface ProjectMapper {
      * @return
      */
     List<Project> queryAll();
+
+	List<Integer> queryProjectIdByName(List<String> projectNamesList);
 }

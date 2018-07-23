@@ -1,17 +1,27 @@
 package com.zd.manager.business.model.fictitious;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value = "查询条件对象", description = "传感器数据查询条件对象")
 public class QueryDataCondition {
 
+	@ApiModelProperty(value = "表名", name = "tableName", required = true)
 	private String tableName;
 
+	@ApiModelProperty(value = "终端编号", name = "smuCmsId", required = true)
 	private String smuCmsId;
 
+	@ApiModelProperty(value = "终端通道", name = "smuCmsChannel", required = true)
 	private String smuCmsChannel;
 
+	@ApiModelProperty(value = "传感器编号", name = "sensorId", required = true)
 	private String sensorId;
 
+	@ApiModelProperty(value = "开始时间", name = "beginTime", required = true)
 	private String beginTime;
 
+	@ApiModelProperty(value = "结束时间", name = "endTime", required = true)
 	private String endTime;
 
 	public String getTableName() {

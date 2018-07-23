@@ -194,6 +194,14 @@
       </if>
     </trim>
   </insert>
+  <update id="updatefirstData">
+  	update zdjc.${_parameter.param1} sld SET sld.first_data =
+	(select t.avgs from
+	(select avg(current_data) avgs from ${_parameter.param1} 
+	where smu_cms_id=#{smuCmsId,jdbcType=VARCHAR} and smu_cms_channel=#{smuCmsChannel,jdbcType=VARCHAR} and
+	 current_times BETWEEN #{beginTimes,jdbcType=VARCHAR} and #{endTimes,jdbcType=VARCHAR} and
+	 sensor_id=#{sensorNumber,jdbcType=VARCHAR}) t )where smu_cms_id=#{smuCmsId,jdbcType=VARCHAR} and smu_cms_channel=#{smuCmsChannel,jdbcType=VARCHAR} and sensor_id=#{sensorNumber,jdbcType=VARCHAR}
+  </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.zd.manager.business.model.StaticLevelData">
     update static_level_data
     <set>

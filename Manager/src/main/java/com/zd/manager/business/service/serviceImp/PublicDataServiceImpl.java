@@ -23,7 +23,6 @@ public class PublicDataServiceImpl implements PublicDataService {
 	@Override
 	public PaginationResult selectData(int offset, int limit,
 			QueryDataCondition conditioin) {
-		System.out.println("offset:" + offset + "  limit:" + limit);
 		Page<Object> offsetPage = PageHelper.startPage(offset, limit);
 		List<PublicData> publicDatas = staticLevelDataMapper.selectData(
 				conditioin.getTableName(), conditioin.getSmuCmsId(),
@@ -31,6 +30,16 @@ public class PublicDataServiceImpl implements PublicDataService {
 				conditioin.getBeginTime(), conditioin.getEndTime());
 		System.out.println(conditioin);
 		return new PaginationResult(offsetPage.getTotal(), publicDatas);
+	}
+
+	@Override
+	public boolean updatefirstData(QueryDataCondition condition) {
+		int result = staticLevelDataMapper.updatefirstData(
+				condition.getTableName(), condition.getSmuCmsId(),
+				condition.getSmuCmsChannel(), condition.getBeginTime(),
+				condition.getEndTime(), condition.getSensorId());
+		System.out.println(condition);
+		return result > 0 ? true : false;
 	}
 
 }

@@ -19,8 +19,8 @@ import com.zd.manager.core.model.Result;
 
 @RestController
 @RequestMapping(value = "/data")
-@Api(tags = { "数据查询接口" })
-public class QueryDataController {
+@Api(tags = { "数据操作接口" })
+public class SensorDataController {
 
 	@Resource
 	private PublicDataService publicDataService;
@@ -37,6 +37,14 @@ public class QueryDataController {
 				.setMsg("操作成功")
 				.setData(
 						publicDataService.selectData(offset, limit, conditioin));
+	}
+
+	@GetMapping(value = "/updateFirstData")
+	@ApiOperation(value = "传感器数据--maoping.li", httpMethod = "GET", response = Result.class, notes = "按时间段查找传感器数据")
+	public Result<Boolean> updateFirstData(
+			@ModelAttribute QueryDataCondition conditioin) {
+		return new Result<Boolean>().setCode(Result.SUCCESS).setMsg("操作成功")
+				.setData(publicDataService.updatefirstData(conditioin));
 	}
 
 }

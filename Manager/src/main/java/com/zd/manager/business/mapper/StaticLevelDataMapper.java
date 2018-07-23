@@ -43,4 +43,20 @@ public interface StaticLevelDataMapper {
 			@Param(value = "sensorId") String smuChannel,
 			@Param(value = "beginTime") String beginDate,
 			@Param(value = "endTime") String endDate);
+
+	/**
+	 * 修改zdjc数据库的数据表第一次数据
+	 * 
+	 * @param tableName
+	 * @param smuCmsId
+	 * @param beginTimes
+	 * @param endTimes
+	 * @param sensorNumber
+	 * @return
+	 */
+	int updatefirstData(String tableName, @Param("smuCmsId") String smuCmsId,
+			@Param(value = "smuCmsChannel") String smuCmsChannel,
+			@Param("beginTimes") String beginTimes,
+			@Param("endTimes") String endTimes,
+			@Param("sensorNumber") String sensorNumber);
 }

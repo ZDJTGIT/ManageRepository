@@ -18,6 +18,7 @@ import com.zd.manager.business.service.MonitorUserService;
 import com.zd.manager.core.model.Result;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 
 @Api(tags="自动监测用户管理模块")
@@ -45,6 +46,7 @@ public class MonitorUserController {
 	@PostMapping("/insertUser")
 	@ResponseBody
 	@ApiOperation(value="新增用户--Kstar",httpMethod="POST",response=Result.class,notes="新增用户")
+	@ApiImplicitParam(name="user",value="用户对象",required=true,dataType="User",paramType="body")
 	public Result<String> insertUser(@RequestBody User user){
 		return userService.insertUser(user);
 	}
@@ -52,7 +54,16 @@ public class MonitorUserController {
 	@DeleteMapping("/deleteUserByUserId")
 	@ResponseBody
 	@ApiOperation(value="根据用户id删除用户--Kstar",httpMethod="DELETE",response=Result.class,notes="根据用户id删除用户")
+	@ApiImplicitParam(name="userId",value="用户id",required=true,dataType="Integer",paramType="query")
 	public Result<String> deleteUserByUserId(@RequestParam Integer userId){
 		return userService.deleteUserByUserId(userId);
+	}
+	
+	@PostMapping("/modifyUser")
+	@ResponseBody
+	@ApiOperation(value="修改用户--Kstar",httpMethod="DELETE",response=Result.class,notes="根据用户json修改用户")
+	@ApiImplicitParam(name="user",value="用户对象",required=true,dataType="User",paramType="body")
+	public Result<String> modifyUser(@RequestBody User user){
+		return userService.updateUser(user);
 	}
 }

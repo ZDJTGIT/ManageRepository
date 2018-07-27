@@ -66,4 +66,14 @@ public class MonitorUserServiceImp implements MonitorUserService {
 		}
 		return result;
 	}
+	@Override
+	public Result<String> updateUser(User user) {
+		Result<String> result = new Result<String>();
+		if(userMapper.updateByPrimaryKey(user)>=0) {
+			result.success("修改用户成功");
+		}else {
+			result.failure("修改用户失败");
+		}
+		return result;
+	}
 }

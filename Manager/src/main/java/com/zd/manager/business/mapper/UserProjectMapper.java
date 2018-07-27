@@ -83,8 +83,26 @@ public interface UserProjectMapper {
      * @return
      */
 	int addProjectsToUser(String userName, List<String> projectNamesList);
-
+	
+	/**
+	 * 根据用户名和项目名删除关联表数据
+	 * @param userName
+	 * @param projectName
+	 * @return
+	 */
 	int deleteProject(@Param("userName")String userName, @Param("projectName")String projectName);
-
+	
+	/**
+	 * 根据用户id删除关联数据
+	 * @param userId
+	 * @return
+	 */
 	int deleteByUserId(Integer userId);
+	
+	/**
+	 * 根据项目id删除关联数据
+	 * @param projectId
+	 * @return
+	 */
+	int deleteByProjectId(Integer projectId);
 }

@@ -140,4 +140,7 @@
   <delete id="deleteByUserId" parameterType="java.lang.Integer">
   	delete from user_project where user_id =#{userId,jdbcType=INTEGER}
   </delete>
+  <delete id="deleteByProjectId" parameterType="java.lang.Integer">
+  	delete from user_project where project_id =#{projectId,jdbcType=INTEGER}
+  </delete>
 </mapper>

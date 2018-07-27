@@ -225,4 +225,7 @@
       sensor_depth = #{sensorDepth,jdbcType=REAL}
     where sensor_id = #{sensorId,jdbcType=INTEGER}
   </update>
+  <select id="queryDataByProjectId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	select <include refid="Base_Column_List" /> from sensor where project_id = #{projectId,jdbcType=INTEGER}
+  </select>
 </mapper>

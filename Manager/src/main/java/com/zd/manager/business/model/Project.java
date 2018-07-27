@@ -3,6 +3,8 @@ package com.zd.manager.business.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Project implements Serializable{
     /**
 	 * 
@@ -284,6 +286,7 @@ public class Project implements Serializable{
      *
      * @mbg.generated Tue Jul 10 10:42:30 CST 2018
      */
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     public Date getProjectBeginTime() {
         return projectBeginTime;
     }
@@ -308,6 +311,7 @@ public class Project implements Serializable{
      *
      * @mbg.generated Tue Jul 10 10:42:30 CST 2018
      */
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     public Date getProjectEndTime() {
         return projectEndTime;
     }

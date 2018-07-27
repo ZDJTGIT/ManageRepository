@@ -7,7 +7,7 @@
     <javaModelGenerator targetPackage="com.zd.manager.business.model" targetProject="Manager/src/main/java" />
     <sqlMapGenerator targetPackage="mapper.business" targetProject="Manager/src/main/resources" />
     <javaClientGenerator targetPackage="com.zd.manager.business.mapper" targetProject="Manager/src/main/java" type="XMLMAPPER" />
-    	<table tableName="project" domainObjectName="Project" enableCountByExample="false" enableUpdateByExample="false"
+    	<!-- <table tableName="project" domainObjectName="Project" enableCountByExample="false" enableUpdateByExample="false"
         enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
     	<table tableName="sensor" domainObjectName="Sensor" enableCountByExample="false" enableUpdateByExample="false"
         enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
@@ -24,6 +24,8 @@
     	<table tableName="terminals_log" domainObjectName="TerminalsLog" enableCountByExample="false" enableUpdateByExample="false"
         enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
     	<table tableName="terminals_project" domainObjectName="TerminalsProject" enableCountByExample="false" enableUpdateByExample="false"
+        enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table> -->
+        <table tableName="sys_code" domainObjectName="SysCode" enableCountByExample="false" enableUpdateByExample="false"
         enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
   </context>
 </generatorConfiguration>

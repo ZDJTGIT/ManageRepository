@@ -1,5 +1,7 @@
 package com.zd.manager.business.mapper;
 
+import java.util.List;
+
 import com.zd.manager.business.model.Sensor;
 
 public interface SensorMapper {
@@ -50,4 +52,6 @@ public interface SensorMapper {
      * @mbg.generated Tue Jul 10 10:42:30 CST 2018
      */
     int updateByPrimaryKey(Sensor record);
+
+	List<Sensor> queryDataByProjectId(Integer projectId);
 }

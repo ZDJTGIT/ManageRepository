@@ -32,4 +32,11 @@ public interface MonitorUserService {
 	 */
 	Result<String> deleteUserByUserId(Integer userId);
 	
+	/**
+	 * 修改用户
+	 * @param user
+	 * @return
+	 */
+	Result<String> updateUser(User user);
+	
 }

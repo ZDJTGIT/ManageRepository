@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.zd.manager.account.model.User;
 import com.zd.manager.business.model.Project;
 import com.zd.manager.business.model.UserProject;
 
@@ -90,7 +91,7 @@ public interface UserProjectMapper {
 	 * @param projectName
 	 * @return
 	 */
-	int deleteProject(@Param("userName")String userName, @Param("projectName")String projectName);
+	int deleteProject(@Param("userId")Integer userId, @Param("projectId")Integer projectId);
 	
 	/**
 	 * 根据用户id删除关联数据
@@ -105,4 +106,17 @@ public interface UserProjectMapper {
 	 * @return
 	 */
 	int deleteByProjectId(Integer projectId);
+	
+	/**
+	 * 根据项目id查询项目下用户
+	 * @param projectId
+	 */
+	List<User> queryUserByProjectId(Integer projectId);
+	
+	/**
+	 * 根据项目id查询项目未拥有用户
+	 * @param projectId
+	 * @return
+	 */
+	List<User> queryNoUserByProjectId(Integer projectId);
 }

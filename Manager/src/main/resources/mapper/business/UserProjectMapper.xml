@@ -133,9 +133,9 @@
   </select>
   <delete id="deleteProject">
   	delete from user_project where project_id = 
-  	(select project_id from project where project_name=#{projectName,jdbcType=VARCHAR})
+  	#{projectId,jdbcType=INTEGER}
   	and user_id = 
-  	(select user_id from user where user_name=#{userName,jdbcType=VARCHAR})
+  	#{userId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByUserId" parameterType="java.lang.Integer">
   	delete from user_project where user_id =#{userId,jdbcType=INTEGER}
@@ -143,4 +143,12 @@
   <delete id="deleteByProjectId" parameterType="java.lang.Integer">
   	delete from user_project where project_id =#{projectId,jdbcType=INTEGER}
   </delete>
+  <select id="queryUserByProjectId" parameterType="java.lang.Integer" resultType="com.zd.manager.account.model.User">
+  	select * from user where user_id in 
+  	(select user_id from user_project where project_id = #{projectId,jdbcType=INTEGER})
+  </select>
+  <select id="queryNoUserByProjectId" parameterType="java.lang.Integer" resultType="com.zd.manager.account.model.User">
+  	select * from user where user_id not in 
+  	(select user_id from user_project where project_id = #{projectId,jdbcType=INTEGER})
+  </select>
 </mapper>

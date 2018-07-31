@@ -159,12 +159,12 @@
 		    <version>2.6.12</version>
 		</dependency>
 		<!-- jxl -->
-		
 		<dependency>
 		    <groupId>com.jcraft</groupId>
 		    <artifactId>jsch</artifactId>
 		    <version>0.1.54</version>
 		</dependency>
+
 	</dependencies>
 
     

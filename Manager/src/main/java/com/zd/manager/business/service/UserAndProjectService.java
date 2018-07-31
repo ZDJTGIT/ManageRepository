@@ -20,26 +20,48 @@ public interface UserAndProjectService {
 	 */
 	public Result<Map<String,Object>> userAndPro();
 	/**
-	 * 根据用户名查询用户下所有项目
-	 * @param user
+	 * 根据用户id查询用户下所有项目
+	 * @param userId
 	 * @return
 	 */
-	public Result<List<Project>> queryProjectsByUserName(User user);
+	public Result<List<Project>> queryProjectsByUserId(Integer userId);
 	/**
-	 * 根据用户名查询用户下未拥有项目
+	 * 根据用户id查询用户下未拥有项目
 	 * @param user
 	 * @return
 	 */
-	public Result<List<Project>> queryNoProjectsByUserName(User user);
+	public Result<List<Project>> queryNoProjectsByUserId(Integer userId);
 	/**
 	 * 根据项目名集合为选定用户添加项目
 	 * @param list
 	 */
 	public Result<String> addProjectsToUser(List<String> list);
 	/**
-	 * 根据用户名和项目名删除用户下对应项目
+	 * 根据用户id和项目id删除用户下对应项目
 	 * @param userName
 	 * @param projectName
 	 */
-	public Result<String> deleteProject(String userName, String projectName);
+	public Result<String> deleteProject(Integer userId, Integer projectId);
+	
+	/**
+	 * 根据项目id查询项目下用户
+	 * @param projectId
+	 * @return
+	 */
+	public Result<List<User>> queryUsersByProjectId(Integer projectId);
+	
+	/**
+	 * 根据项目id查询项目下未拥有用户
+	 * @param projectId
+	 * @return
+	 */
+	public Result<List<User>> queryNoUsersByProjectId(Integer projectId);
+	
+	/**
+	 * 通过用户id集合给项目添加用户管理者
+	 * @param list
+	 * @return
+	 */
+	public Result<String> addUserToProject(List<String> list);
+	
 }

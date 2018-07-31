@@ -47,21 +47,21 @@ public class UserAndProjectController {
 		Result<Map<String, Object>> userAndPro = userAndProjectService.userAndPro();
 		return userAndPro;
 	}
-	@PostMapping("/queryProjectByUserName")
+	@GetMapping("/queryProjectByUserId")
 	@ResponseBody
-	@ApiOperation(value="根据用户名查询用户下所有项目--Kstar",httpMethod="POST",response=Result.class,notes="根据用户名查询用户下所有项目")
-	@ApiImplicitParam(name="user",value="用户对象",required=true,dataType="User",paramType="body")
-	public Result<List<Project>> queryProjectByUserName(@RequestBody User user) {
-		Result<List<Project>> result = userAndProjectService.queryProjectsByUserName(user);
+	@ApiOperation(value="根据用户id查询用户下所有项目--Kstar",httpMethod="GET",response=Result.class,notes="根据用户id查询用户下所有项目")
+	@ApiImplicitParam(name="userId",value="用户Id",required=true,dataType="Integer",paramType="query")
+	public Result<List<Project>> queryProjectByUserId(@RequestParam Integer userId) {
+		Result<List<Project>> result = userAndProjectService.queryProjectsByUserId(userId);
 		return result;
 	}
 	
-	@PostMapping("/queryNoProjectByUserName")
+	@GetMapping("/queryNoProjectByUserId")
 	@ResponseBody
-	@ApiOperation(value="根据用户名查询用户未拥有项目--Kstar",httpMethod="POST",response=Result.class,notes="根据用户名查询用户下未拥有项目")
-	@ApiImplicitParam(name="user",value="用户对象",required=true,dataType="User",paramType="body")
-	public Result<List<Project>> queryNoProjectByUserName(@RequestBody User user){
-		Result<List<Project>> result = userAndProjectService.queryNoProjectsByUserName(user);
+	@ApiOperation(value="根据用户Id查询用户未拥有项目--Kstar",httpMethod="GET",response=Result.class,notes="根据用户Id查询用户下未拥有项目")
+	@ApiImplicitParam(name="userId",value="用户Id",required=true,dataType="String",paramType="query")
+	public Result<List<Project>> queryNoProjectByUserId(@RequestParam Integer userId){
+		Result<List<Project>> result = userAndProjectService.queryNoProjectsByUserId(userId);
 		return result;
 	}
 	
@@ -75,9 +75,41 @@ public class UserAndProjectController {
 	
 	@DeleteMapping("/deleteProjectForUser")
 	@ResponseBody
-	@ApiOperation(value="通过项目名删除用户下项目--Kstar",httpMethod="DELETE",response=Result.class,notes="通过项目名删除用户下项目")
-	public Result<String> deleteProjectForUser(@RequestParam String userName,@RequestParam String projectName){
-		return userAndProjectService.deleteProject(userName,projectName);
+	@ApiOperation(value="通过项目id删除用户下项目--Kstar",httpMethod="DELETE",response=Result.class,notes="通过项目id删除用户下项目")
+	public Result<String> deleteProjectForUser(@RequestParam Integer userId,@RequestParam Integer projectId){
+		return userAndProjectService.deleteProject(userId,projectId);
 	}
 	
+	@GetMapping("/queryUserByProjectId")
+	@ResponseBody
+	@ApiOperation(value="根据项目id查询项目下所有用户--Kstar",httpMethod="GET",response=Result.class,notes="根据项目id查询项目下所有用户")
+	@ApiImplicitParam(name="projectId",value="项目Id",required=true,dataType="Integer",paramType="query")
+	public Result<List<User>> queryUsertByProjectId(@RequestParam Integer projectId) {
+		Result<List<User>> result = userAndProjectService.queryUsersByProjectId(projectId);
+		return result;
+	}
+	
+	@GetMapping("/queryNoUserByProjectId")
+	@ResponseBody
+	@ApiOperation(value="根据项目Id查询项目未拥有用户--Kstar",httpMethod="GET",response=Result.class,notes="根据项目Id查询项目下未拥有用户")
+	@ApiImplicitParam(name="projectId",value="项目Id",required=true,dataType="String",paramType="query")
+	public Result<List<User>> queryNoUserByProjectId(@RequestParam Integer projectId){
+		Result<List<User>> result = userAndProjectService.queryNoUsersByProjectId(projectId);
+		return result;
+	}
+	
+	@PostMapping("/addUserToProject")
+	@ResponseBody
+	@ApiOperation(value="通过用户id集合给项目添加用户管理者--Kstar",httpMethod="POST",response=Result.class,notes="给项目添加用户管理者")
+	@ApiImplicitParam(name="list",value="项目名集合",required=true,dataType="List",paramType="body")
+	public Result<String> addUserToProject(@RequestBody List<String> list){
+		return userAndProjectService.addUserToProject(list);
+	}
+	
+	@DeleteMapping("/deleteUserForProject")
+	@ResponseBody
+	@ApiOperation(value="通过用户id删除项目管理者--Kstar",httpMethod="DELETE",response=Result.class,notes="通过用户id删除项目管理者")
+	public Result<String> deleteUserForProject(@RequestParam Integer projectId,@RequestParam Integer userId){
+		return userAndProjectService.deleteProject(userId,projectId);
+	}
 }

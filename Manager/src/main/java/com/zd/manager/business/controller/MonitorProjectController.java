@@ -3,6 +3,7 @@ package com.zd.manager.business.controller;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 
@@ -21,15 +22,22 @@ import com.zd.manager.business.model.Project;
 import com.zd.manager.business.model.Sensor;
 import com.zd.manager.business.service.MonitorProjectService;
 import com.zd.manager.core.model.Result;
+import com.zd.manager.core.util.JschRemote;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 
 @Api(tags="自动监测项目管理模块")
 @Controller
 @RequestMapping("/managerProject")
 public class MonitorProjectController {
+	
+	private static final String image_directory = "/data/cbs02/mnt/monitor/images";
+	
+	@Resource
+	private JschRemote jschRemote;
 	
 	@Resource
 	private MonitorProjectService monitorProjectService;
@@ -58,25 +66,25 @@ public class MonitorProjectController {
 	@PostMapping("/insertProject")
 	@ResponseBody
 	@ApiOperation(value="新增项目--Kstar",httpMethod="POST",response=Result.class,notes="新增项目")
+	@ApiImplicitParam(name="project",value="项目对象",required=true,dataType="Project",paramType="body")
+	@ApiImplicitParams({@ApiImplicitParam(name="project",value="项目对象",required=true,dataType="Project",paramType="form"),
+		@ApiImplicitParam(name="file",value="文件对象",required=true,paramType="form")})
 	public Result<String> insertProject(MultipartRequest file,Project project){
 		Map<String, MultipartFile> multipartFileMap = file.getFileMap();
 		Iterator<String> keySet = multipartFileMap.keySet().iterator();	
+		String finalName="";
 		while (keySet.hasNext()) {
-
 			String key = keySet.next();
-
 			MultipartFile multipartFile = multipartFileMap.get(key);
-
 			if (multipartFile.isEmpty())
 				continue;
-
 			String fileName = multipartFile.getOriginalFilename();
-			System.out.println(fileName);
+			finalName = UUID.randomUUID().toString()+fileName;
+			jschRemote.connect();
+			jschRemote.upload2(multipartFile, finalName);
 		}
-
-//		String originalFilename = file.getOriginalFilename();
-		System.out.println(project.getProjectAddress()+project.getProjectName());
-		return null;
+		project.setProjectImageUrl(image_directory+"/"+finalName);
+		return monitorProjectService.insertProject(project);
 	}
 	
 	@DeleteMapping("/deleteProjectByProjectId")

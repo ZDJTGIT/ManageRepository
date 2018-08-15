@@ -2,6 +2,8 @@ package com.zd.manager.business.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.zd.manager.business.model.Project;
 
 public interface ProjectMapper {
@@ -48,4 +50,12 @@ public interface ProjectMapper {
     List<Project> queryAll();
 
 	List<Integer> queryProjectIdByName(List<String> projectNamesList);
+
+	List<Project> queryProjectWithSomething(@Param("start")Integer start,@Param("end") Integer end,@Param("sortFeild") String sortFeild,@Param("order") String order);
+
+	List<Project> queryProject(@Param("start")Integer start,@Param("end")Integer end,@Param("sortField") String sortField,@Param("sortOrder") String sortOrder,@Param("projectType") String[] projectType,
+			@Param("projectStatus") String[] projectStatus);
+
+	Integer queryTotal(@Param("start")Integer start, @Param("end")Integer end, @Param("sortField")String sortField, @Param("sortOrder")String sortOrder,@Param("projectType") String[] projectType,
+			@Param("projectStatus") String[] projectStatus);
 }

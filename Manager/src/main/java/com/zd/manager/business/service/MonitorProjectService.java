@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.zd.manager.business.model.Project;
 import com.zd.manager.business.model.Sensor;
+import com.zd.manager.business.model.SensorGradiograph;
 import com.zd.manager.core.model.Result;
 
 public interface MonitorProjectService {
@@ -46,7 +47,7 @@ public interface MonitorProjectService {
 	 * @param projectId
 	 * @return
 	 */
-	Result<List<Map<String, Object>>> getSensorData(Integer projectId);
+	Result<Map<String, Object>> getSensorData(Integer projectId);
 
 	/**
 	 * 获取新增传感器必要的基础数据
@@ -67,7 +68,7 @@ public interface MonitorProjectService {
 	 * @param monitorTypeValue 
 	 * @return
 	 */
-	Result<String> modifySensor(Sensor sensor, String monitorTypeValue);
+	Result<String> modifySensor(Sensor sensor);
 	
 	/**
 	 * 根据传感器id删除传感器
@@ -75,5 +76,15 @@ public interface MonitorProjectService {
 	 * @return
 	 */
 	Result<String> deleteSensorBySensorId(Integer sensorId);
+	
+	Result<Map<String, Object>> queryAllProjects1(Integer results, Integer page, String sortField,
+			String sortOrder, String[] projectType, String[] projectStatus);
+
+	Result<String> deleteGraSensorBySensorId(Integer sensorId);
+
+	Result<String> modifySensor(SensorGradiograph sensorGradiograph);
+
+	Result<String> insertGraSensor(SensorGradiograph sensorGradiograph);
+	
 
 }

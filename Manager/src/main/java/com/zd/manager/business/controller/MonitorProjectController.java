@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartRequest;
 
 import com.zd.manager.business.model.Project;
 import com.zd.manager.business.model.Sensor;
+import com.zd.manager.business.model.SensorGradiograph;
 import com.zd.manager.business.service.MonitorProjectService;
 import com.zd.manager.core.model.Result;
 import com.zd.manager.core.util.JschRemote;
@@ -34,19 +35,26 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping("/managerProject")
 public class MonitorProjectController {
 	
-	private static final String image_directory = "/data/cbs02/mnt/monitor/images";
+	private static final String image_directory = "/data/cbs02/mnt/monitor/images/test";
 	
 	@Resource
 	private JschRemote jschRemote;
 	
 	@Resource
 	private MonitorProjectService monitorProjectService;
-	
-	@GetMapping("/queryAllProject")
+
+	@GetMapping("queryAllProject")
 	@ResponseBody
-	@ApiOperation(value="查询所有项目--Kstar",httpMethod="GET",response=Result.class,notes="查询所有项目数据")
-	public Result<List<Project>> queryAllProject(){
-		return monitorProjectService.queryAllProjects();
+	@ApiOperation(value="根据排序，分页，筛选获取所有项目--Kstar",httpMethod="GET",response=Result.class,notes="获取项目信息")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name="results",value="显示页数",required=true,paramType="query"),
+			@ApiImplicitParam(name="page",value="当前页",required=false,paramType="query"),
+			@ApiImplicitParam(name="sortField",value="排序字段",required=false,paramType="query"),
+			@ApiImplicitParam(name="sortOrder",value="排序顺序",required=false,paramType="query"),
+			@ApiImplicitParam(name="projectType",value="筛选项目类型",required=false,paramType="query"),
+			@ApiImplicitParam(name="projectStatus",value="筛选项目状态",required=false,paramType="query"),})
+	public Result<Map<String,Object>> queryAllProjects(Integer results,Integer page,String sortField,String sortOrder,@RequestParam(value = "projectType[]",required = false,defaultValue = "")String[] projectType,@RequestParam(value = "projectStatus[]",required = false,defaultValue = "")String[] projectStatus){
+		return monitorProjectService.queryAllProjects1(results,page,sortField,sortOrder,projectType,projectStatus);
 	}
 	
 	@GetMapping("/getCreateProjectData")
@@ -56,13 +64,6 @@ public class MonitorProjectController {
 		return monitorProjectService.getCreateProjectData();
 	}
 	
-//	@PostMapping("/insertProject")
-//	@ResponseBody
-//	@ApiOperation(value="新增项目--Kstar",httpMethod="POST",response=Result.class,notes="新增项目")
-//	@ApiImplicitParam(name="project",value="项目对象",required=true,dataType="Project",paramType="body")
-//	public Result<String> insertProject(@RequestBody Project project){
-//		return monitorProjectService.insertProject(project);
-//	}
 	@PostMapping("/insertProject")
 	@ResponseBody
 	@ApiOperation(value="新增项目--Kstar",httpMethod="POST",response=Result.class,notes="新增项目")
@@ -107,7 +108,7 @@ public class MonitorProjectController {
 	@ResponseBody
 	@ApiOperation(value="根据项目id获取传感器信息--Kstar",httpMethod="GET",response=Result.class,notes="根据项目id获取传感器信息")
 	@ApiImplicitParam(name="projectId",value="项目id",required=true,dataType="String",paramType="query")
-	public Result<List<Map<String,Object>>> getSensorData( Integer projectId){
+	public Result<Map<String,Object>> getSensorData( Integer projectId){
 		return monitorProjectService.getSensorData(projectId);
 	}
 	
@@ -126,12 +127,28 @@ public class MonitorProjectController {
 		return monitorProjectService.insertSensor(sensor);
 	}
 	
+	@PostMapping("/insertGraSensor")
+	@ResponseBody
+	@ApiOperation(value="新增测斜传感器--Kstar",httpMethod="POST",response=Result.class,notes="新增测斜传感器")
+	@ApiImplicitParam(name="sensorGradiograph",value="测斜传感器json",required=true,dataType="SensorGradiograph",paramType="form")
+	public Result<String> insertGraSensor(@RequestBody SensorGradiograph sensorGradiograph){
+		return monitorProjectService.insertGraSensor(sensorGradiograph);
+	}
+	
 	@PostMapping("/modifySensor")
 	@ResponseBody
 	@ApiOperation(value="根据传感器id修改传感器--Kstar",httpMethod="POST",response=Result.class,notes="修改传感器")
 	@ApiImplicitParam(name="sensor",value="传感器json",required=true,dataType="Sensor",paramType="form")
-	public Result<String> modifySensor(@RequestBody Sensor sensor,@RequestParam String monitorTypeValue){
-		return monitorProjectService.modifySensor(sensor,monitorTypeValue);
+	public Result<String> modifySensor(@RequestBody Sensor sensor){
+		return monitorProjectService.modifySensor(sensor);
+	}
+	
+	@PostMapping("/modifyGraSensor")
+	@ResponseBody
+	@ApiOperation(value="根据传感器id修改测斜传感器--Kstar",httpMethod="POST",response=Result.class,notes="修改测斜传感器")
+	@ApiImplicitParam(name="sensorGradiograph",value="测斜传感器json",required=true,dataType="SensorGradiograph",paramType="form")
+	public Result<String> modifyGraSensor(@RequestBody SensorGradiograph sensorGradiograph){
+		return monitorProjectService.modifySensor(sensorGradiograph);
 	}
 	
 	@DeleteMapping("/deleteSensorBySonsor")
@@ -141,54 +158,12 @@ public class MonitorProjectController {
 	public Result<String> deleteSensorBySonsor(@RequestParam Integer sensorId){
 		return monitorProjectService.deleteSensorBySensorId(sensorId);
 	}
-//	public  Result<String> Cfg(MultipartRequest file, String projectId,String reportType,String timeOfReport,String userId) {
-//		//String message = "上传成功";
-//		Map<String, MultipartFile> multipartFileMap = file.getFileMap();
-//		Iterator<String> keySet = multipartFileMap.keySet().iterator();		
-//		//文件上传跟路径
-//		String root = gitYmlParaUtils.accordingOsGetParm("pdf");
-//		//已项目id，和报表类型作为根目录下面的子目录，如果该目录结构不存在，则直接创建
-//		//文件输出路径
-//		String currentPath = root+projectId+reportType+"/";
-//		File catalogue  =  new File(currentPath);
-//		if(!catalogue.isDirectory()){
-//			catalogue.mkdir();
-//		}
-//		while(keySet.hasNext()){
-//			String key  = keySet.next();
-//			MultipartFile multipartFile  = multipartFileMap.get(key);
-//			if(multipartFile.isEmpty()) continue;					
-//			String fileName = multipartFile.getOriginalFilename();
-//			String  fileSuffix = fileName.substring(fileName.lastIndexOf(".")+1, fileName.length());
-//			if(!fileSuffix.equalsIgnoreCase("PDF")){
-//				return  new  Result<String>().failure("只支持pdf文件上传");
-//			}
-//			List<AuthorityReport> nameList = selectFileName(projectId,reportType,fileName);
-//			if(nameList.size()>0) return new  Result<String>().failure(fileName+":文件名重复,请重命名,或者删除服务器重名文件,再上传");
-//			byte[] bytes;
-//			try {
-//				//文件输出路径+文件名
-//				String reportPath = currentPath+fileName;
-//				bytes = multipartFile.getBytes();
-//				FileOutputStream out = new FileOutputStream(reportPath);
-//				out.write(bytes);
-//				out.close();
-//				AuthorityReport authorityReport = new AuthorityReport();
-//				authorityReport.setProjectId(projectId);
-//				authorityReport.setReportTyp(reportType);
-//				authorityReport.setReportPath(currentPath);
-//				authorityReport.setReportName(fileName);
-//				User user = userMapper.selectByPrimaryKey(Integer.parseInt(userId));
-//				authorityReport.setCommit_user(user.getRealName());
-//				String time = new DateTime().toString("YYYY-MM-dd HH:mm:ss");
-//				authorityReport.setCommit_time(time);
-//				authorityReport.setTimeof_Report(timeOfReport);
-//				authorityReport.setPersonIn_charge( getAlarmMan(projectId));
-//				insertMasage(authorityReport);
-//			} catch (IOException e) {
-//				return  new Result<String>().success("上传失败，系统错误");
-//			}
-//		}
-//		return  new Result<String>().success("上传成功");
-//	}
+
+	@DeleteMapping("/deleteGraSensorBySonsor")
+	@ResponseBody
+	@ApiOperation(value="根据传感器id删除传感器--Kstar",httpMethod="GET",response=Result.class,notes="删除传感器")
+	@ApiImplicitParam(name="sensorId",value="传感器Id",required=true,dataType="Sensor",paramType="query")
+	public Result<String> deleteGraSensorBySonsor(@RequestParam Integer sensorId){
+		return monitorProjectService.deleteGraSensorBySensorId(sensorId);
+	}
 }

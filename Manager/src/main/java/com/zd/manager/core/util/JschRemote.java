@@ -25,7 +25,7 @@ public class JschRemote {
 	private JSch jsch;
 	private Session session;
 
-	private static final String image_directory = "/data/cbs02/mnt/monitor/images";
+	private static final String image_directory = "/data/cbs02/mnt/monitor/images/test";
 
 	/**
 	 * 连接到指定的IP的服务器

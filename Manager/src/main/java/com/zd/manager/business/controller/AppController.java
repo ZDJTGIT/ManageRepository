@@ -1,8 +1,11 @@
 package com.zd.manager.business.controller;
 
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,5 +33,11 @@ public class AppController {
 	@ResponseBody
 	public Result<String> uploadPictures(@RequestParam("files")MultipartFile[] files,@RequestParam("priority")Integer[] priority,@RequestParam("description")String[] description) {
 		return appService.UploadPicture(files,priority,description);
+	}
+	
+	@GetMapping("/myplay")
+	@ResponseBody
+	public Result<Map<String,Object>> myplay(@RequestParam("results") Integer results,@RequestParam("page")Integer page,@RequestParam("sortField")String sortFeild,@RequestParam("sortOrder")String sortOrder){
+		return appService.paly(results,page,sortFeild,sortOrder);
 	}
 }

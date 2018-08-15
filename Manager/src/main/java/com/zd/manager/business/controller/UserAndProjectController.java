@@ -70,6 +70,9 @@ public class UserAndProjectController {
 	@ApiOperation(value="通过项目名集合给用户添加项目控制权--Kstar",httpMethod="POST",response=Result.class,notes="给用户添加项目控制权")
 	@ApiImplicitParam(name="list",value="项目名集合",required=true,dataType="List",paramType="body")
 	public Result<String> addProjectsToUser(@RequestBody List<String> list){
+		for (int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i));
+		}
 		return userAndProjectService.addProjectsToUser(list);
 	}
 	

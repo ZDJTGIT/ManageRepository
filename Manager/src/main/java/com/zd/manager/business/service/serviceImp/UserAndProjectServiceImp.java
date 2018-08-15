@@ -75,11 +75,10 @@ public class UserAndProjectServiceImp implements UserAndProjectService {
 		}else {
 			String userIdStr = list.get(0);
 			Integer userId = Integer.valueOf(userIdStr);
-			List<String> projectNamesList = new ArrayList<String>();
+			List<Integer> projectIdList = new ArrayList<Integer>();
 			for(int i=1;i<list.size();i++) {
-				projectNamesList.add(list.get(i));
-			}
-			List<Integer> projectIdList = projectMapper.queryProjectIdByName(projectNamesList);
+				projectIdList.add(Integer.valueOf(list.get(i)));
+			}	
 			for (int i = 0; i < projectIdList.size(); i++) {
 				UserProject up = new UserProject();
 				up.setUserId(userId);

@@ -7,20 +7,37 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class Project implements Serializable{
+public class Project implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private Integer projectId;
+
 	private String projectName;
+
 	private Integer projectType;
+
 	private String projectAddress;
+
 	private String weatherAddress;
+
 	private String projectLongitude;
+
 	private String projectLatitude;
+
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date projectBeginTime;
+
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date projectEndTime;
+
 	private Integer projectStatus;
+
 	private String projectDescription;
+
 	private String projectImageUrl;
 
 	public Integer getProjectId() {
@@ -116,10 +133,9 @@ public class Project implements Serializable{
 	public String getProjectImageUrl() {
 		return projectImageUrl;
 	}
-	
+
 	public void setProjectImageUrl(String projectImageUrl) {
 		this.projectImageUrl = projectImageUrl;
 	}
 
-	private static final long serialVersionUID = 1L;
 }

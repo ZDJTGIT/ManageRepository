@@ -78,7 +78,7 @@ public interface MonitorProjectService {
 	Result<String> deleteSensorBySensorId(Integer sensorId);
 	
 	Result<Map<String, Object>> queryAllProjects1(Integer results, Integer page, String sortField,
-			String sortOrder, String[] projectType, String[] projectStatus);
+			String sortOrder, String[] projectType, String[] projectStatus, String projectId, String projectName, String projectType2, String projectAddress, String projectStatus2);
 
 	Result<String> deleteGraSensorBySensorId(Integer sensorId);
 

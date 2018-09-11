@@ -19,6 +19,7 @@ import com.zd.manager.business.model.SensorGradiograph;
 import com.zd.manager.business.model.SysCode;
 import com.zd.manager.business.service.MonitorProjectService;
 import com.zd.manager.core.model.Result;
+import com.zd.manager.core.util.StringUtils;
 
 @Service
 public class MomitorProjectServiceImp implements MonitorProjectService {
@@ -47,8 +48,10 @@ public class MomitorProjectServiceImp implements MonitorProjectService {
 	}
 	@Override
 	public Result<Map<String, Object>> queryAllProjects1(Integer results, Integer page, String sortField,
-			String sortOrder, String[] projectType, String[] projectStatus) {
+			String sortOrder, String[] projectType, String[] projectStatus, String projectId, String projectName,
+			String projectType2, String projectAddress, String projectStatus2) {
 		Integer start=0;
+		String sortFieldStr = null;
 		if(page==null) {
 			start = 0;
 		}else {
@@ -64,22 +67,23 @@ public class MomitorProjectServiceImp implements MonitorProjectService {
 			}else {
 				sortOrder = "desc";
 			}
-			char[] array = sortField.toCharArray();
-			int k = 0;
-			for(int i=0;i<array.length;i++) {
-				if(array[i]<='Z'&&array[i]>='A') {
-					StringBuilder sb = new StringBuilder(sortField);
-					sortField = sb.replace(i+k,i+k+1,String.valueOf(array[i]+=32)).toString();
-					String str1 = sortField.substring(0, i+k);
-					String str2 = sortField.substring(i+k);
-					sortField = str1+"_"+str2;
-					k+=1;
-				}
-			}
+			sortFieldStr = StringUtils.humpToUnderline(sortField);
+//			char[] array = sortField.toCharArray();
+//			int k = 0;
+//			for(int i=0;i<array.length;i++) {
+//				if(array[i]<='Z'&&array[i]>='A') {
+//					StringBuilder sb = new StringBuilder(sortField);
+//					sortField = sb.replace(i+k,i+k+1,String.valueOf(array[i]+=32)).toString();
+//					String str1 = sortField.substring(0, i+k);
+//					String str2 = sortField.substring(i+k);
+//					sortField = str1+"_"+str2;
+//					k+=1;
+//				}
+//			}
 		}
 
-		List<Project> list = projectMapper.queryProject(start,end,sortField,sortOrder,projectType,projectStatus);
-		Integer total = projectMapper.queryTotal(start,end,sortField,sortOrder,projectType,projectStatus);
+		List<Project> list = projectMapper.queryProject(start,end,sortFieldStr,sortOrder,projectType,projectStatus,projectId,projectName,projectType2,projectAddress,projectStatus2);
+		Integer total = projectMapper.queryTotal(start,end,sortFieldStr,sortOrder,projectType,projectStatus,projectId,projectName,projectType2,projectAddress,projectStatus2);
 		HashMap<String, Object> map = new HashMap<String,Object>();
 		map.put("data", list);
 		map.put("total", total);

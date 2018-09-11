@@ -54,8 +54,8 @@ public interface ProjectMapper {
 	List<Project> queryProjectWithSomething(@Param("start")Integer start,@Param("end") Integer end,@Param("sortFeild") String sortFeild,@Param("order") String order);
 
 	List<Project> queryProject(@Param("start")Integer start,@Param("end")Integer end,@Param("sortField") String sortField,@Param("sortOrder") String sortOrder,@Param("projectType") String[] projectType,
-			@Param("projectStatus") String[] projectStatus);
+			@Param("projectStatus") String[] projectStatus,@Param("projectId")String projectId, @Param("projectName")String projectName, @Param("projectType1")String projectType2, @Param("projectAddress")String projectAddress, @Param("projectStatus1")String projectStatus2);
 
 	Integer queryTotal(@Param("start")Integer start, @Param("end")Integer end, @Param("sortField")String sortField, @Param("sortOrder")String sortOrder,@Param("projectType") String[] projectType,
-			@Param("projectStatus") String[] projectStatus);
+			@Param("projectStatus") String[] projectStatus, @Param("projectId")String projectId, @Param("projectName")String projectName, @Param("projectType1")String projectType2, @Param("projectAddress")String projectAddress, @Param("projectStatus1")String projectStatus2);
 }

@@ -200,6 +200,21 @@
   			<foreach collection="projectStatus" item="projectStatus" index="index"
                open="(" close=")" separator=",">#{projectStatus}</foreach>
      	</if>
+     	<if test="projectId != null &amp;&amp; projectId !=''">
+     		and project_id = #{projectId}  
+     	</if>
+     	<if test="projectName != null &amp;&amp; projectName !=''">
+     		and project_name like concat('%',#{projectName},'%')  
+     	</if>
+     	<if test="projectType1 != null &amp;&amp; projectType1 !=''">
+     		and project_type = #{projectType1}  
+     	</if>
+     	<if test="projectAddress != null &amp;&amp; projectAddress !=''">
+     		and project_address like concat('%',#{projectAddress},'%')
+     	</if>
+     	<if test="projectStatus1 != null &amp;&amp; projectStatus1 !=''">
+     		and project_status = #{projectStatus1}  
+     	</if>
     </where>
   	<if test="sortField != null and sortOrder != null">order by ${sortField} ${sortOrder}</if>
   	limit #{start,jdbcType=INTEGER},#{end,jdbcType=INTEGER}
@@ -215,6 +230,21 @@
   		<if test="projectStatus.length >0">and project_status in 
   			<foreach collection="projectStatus" item="projectStatus" index="index"
                open="(" close=")" separator=",">#{projectStatus}</foreach>
+     	</if>
+     	<if test="projectId != null &amp;&amp; projectId !=''">
+     		and project_id = #{projectId}  
+     	</if>
+     	<if test="projectName != null &amp;&amp; projectName !=''">
+     		and project_name like concat('%',#{projectName},'%')  
+     	</if>
+     	<if test="projectType1 != null &amp;&amp; projectType1 !=''">
+     		and project_type = #{projectType1}  
+     	</if>
+     	<if test="projectAddress != null &amp;&amp; projectAddress !=''">
+     		and project_address like concat('%',#{projectAddress},'%') 
+     	</if>
+     	<if test="projectStatus1 != null &amp;&amp; projectStatus1 !=''">
+     		and project_status = #{projectStatus1}  
      	</if>
     </where>
   </select>

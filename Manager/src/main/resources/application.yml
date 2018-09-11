@@ -9,12 +9,11 @@ spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     #url: jdbc:mysql://123.207.39.209:3306/monitor?useUnicode=true&characterEncoding=utf-8
-    url: jdbc:mysql://127.0.0.1:3306/warehouse?useUnicode=true&characterEncoding=utf-8
-    username: dba
-    password: hnzdjc@
-    #url: jdbc:mysql://127.0.0.1:3306/myMonitor?useUnicode=true&characterEncoding=utf-8
-    #username: root
-    #password: root
+    #username: dba
+    #password: hnzdjc@
+    url: jdbc:mysql://127.0.0.1:3306/myMonitor?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: root
     # 使用druid数据源
     druid:
       # 配置监控统计拦截的filters

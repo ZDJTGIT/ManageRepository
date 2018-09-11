@@ -15,6 +15,10 @@ public class MultipartConfig {
         factory.setMaxFileSize("102400KB"); //KB,MB
         /// 设置总上传数据总大小
         factory.setMaxRequestSize("1024000KB");
+        //文件上传临时路径linux
+//        factory.setLocation("/data/cbs02/mnt/monitor/temp");
+        //文件上传临时路径windows
+        factory.setLocation("E:/temp");
         return factory.createMultipartConfig();
 	}
 }

@@ -46,21 +46,24 @@ public class MonitorProjectController {
 	@ResponseBody
 	@ApiOperation(value = "根据排序，分页，筛选获取所有项目--Kstar", httpMethod = "GET", response = Result.class, notes = "获取项目信息")
 	@ApiImplicitParams({
-			@ApiImplicitParam(name = "results", value = "显示页数", required = true, paramType = "query"),
-			@ApiImplicitParam(name = "page", value = "当前页", required = false, paramType = "query"),
-			@ApiImplicitParam(name = "sortField", value = "排序字段", required = false, paramType = "query"),
-			@ApiImplicitParam(name = "sortOrder", value = "排序顺序", required = false, paramType = "query"),
-			@ApiImplicitParam(name = "projectType", value = "筛选项目类型", required = false, paramType = "query"),
-			@ApiImplicitParam(name = "projectStatus", value = "筛选项目状态", required = false, paramType = "query"), })
-	public Result<Map<String, Object>> queryAllProjects(
-			Integer results,
-			Integer page,
-			String sortField,
-			String sortOrder,
-			@RequestParam(value = "projectType[]", required = false, defaultValue = "") String[] projectType,
-			@RequestParam(value = "projectStatus[]", required = false, defaultValue = "") String[] projectStatus) {
-		return monitorProjectService.queryAllProjects1(results, page,
-				sortField, sortOrder, projectType, projectStatus);
+			@ApiImplicitParam(name="results",value="显示页数",required=true,paramType="query"),
+			@ApiImplicitParam(name="page",value="当前页",required=false,paramType="query"),
+			@ApiImplicitParam(name="sortField",value="排序字段",required=false,paramType="query"),
+			@ApiImplicitParam(name="sortOrder",value="排序顺序",required=false,paramType="query"),
+			@ApiImplicitParam(name="projectType1",value="表格内筛选项目类型",required=false,paramType="query"),
+			@ApiImplicitParam(name="projectStatus1",value="表格内筛选项目状态",required=false,paramType="query"),
+			@ApiImplicitParam(name="projectStatus",value="表格外筛选项目状态",required=false,paramType="query"),
+			@ApiImplicitParam(name="projectType",value="表格外筛选项目种类",required=false,paramType="query"),
+			@ApiImplicitParam(name="projectName",value="表格外筛选项目名",required=false,paramType="query"),
+			@ApiImplicitParam(name="projectId",value="表格外筛选项目id",required=false,paramType="query"),
+			@ApiImplicitParam(name="projectAddress",value="表格外筛选项目地址",required=false,paramType="query"),
+			})
+	public Result<Map<String,Object>> queryAllProjects(Integer results,Integer page,String sortField,String sortOrder,
+			@RequestParam(value = "projectType[]",required = false,defaultValue = "")String[] projectType1,
+			@RequestParam(value = "projectStatus[]",required = false,defaultValue = "")String[] projectStatus1,
+			String projectId,String projectName,String projectType,String projectAddress,String projectStatus){
+		return monitorProjectService.queryAllProjects1(results,page,sortField,sortOrder,projectType1,projectStatus1
+				,projectId,projectName,projectType,projectAddress,projectStatus);
 	}
 
 	@GetMapping("/getCreateProjectData")
@@ -87,7 +90,9 @@ public class MonitorProjectController {
 			if (multipartFile.isEmpty())
 				continue;
 			String fileName = multipartFile.getOriginalFilename();
-			finalName = UUID.randomUUID().toString() + fileName;
+			int index = fileName.lastIndexOf('.');
+			String suffix = fileName.substring(index);
+			finalName = UUID.randomUUID().toString()+suffix;
 			jschRemote.connect();
 			jschRemote.upload2(multipartFile, finalName);
 		}

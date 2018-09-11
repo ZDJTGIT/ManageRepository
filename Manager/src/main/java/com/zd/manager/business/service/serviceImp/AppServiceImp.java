@@ -39,6 +39,7 @@ public class AppServiceImp implements AppService {
 		for (int i = 0; i < files.length; i++) {
 			jschRemote.connect();
 			String name = files[i].getOriginalFilename();
+			System.out.println(name);
 			String suffix = name.substring(name.indexOf('.'));
 			String upName = UUID.randomUUID()+suffix;
 			jschRemote.upload2(files[i],upName );

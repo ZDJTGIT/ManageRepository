@@ -33,4 +33,10 @@ public interface SysCodeMapper {
 	 * @return
 	 */
 	List<SysCode> queryByTypeCode(Integer typeCode);
+	
+	/**
+	 * 查询所有以data结尾的表名
+	 * @return
+	 */
+	List<String> queryDataTableName();
 }

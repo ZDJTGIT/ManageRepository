@@ -14,4 +14,8 @@ public interface TablenameMonitortypeMapper {
     int updateByPrimaryKeySelective(TablenameMonitortype record);
 
     int updateByPrimaryKey(TablenameMonitortype record);
+
+    TablenameMonitortype queryByMonitorType(Integer monitorTypeNumber);
+
+	int deleteByMonitorType(Integer number);
 }

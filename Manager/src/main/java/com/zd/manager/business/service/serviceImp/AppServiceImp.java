@@ -22,7 +22,8 @@ import com.zd.manager.core.util.JschRemote;
 @Service
 public class AppServiceImp implements AppService {
 	
-	private static final String image_directory = "/data/cbs02/mnt/monitor/images/test";
+//	private static final String image_directory = "/data/cbs02/mnt/monitor/images/test";
+	private static final String image_directory = "/data/cbs02/mnt/monitor/images";
 
 	@Resource
 	private JschRemote jschRemote;

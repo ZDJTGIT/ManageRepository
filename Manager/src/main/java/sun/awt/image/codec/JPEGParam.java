@@ -1,13 +1,14 @@
 package sun.awt.image.codec;
 
-import com.sun.image.codec.jpeg.JPEGDecodeParam;
-import com.sun.image.codec.jpeg.JPEGEncodeParam;
-import com.sun.image.codec.jpeg.JPEGHuffmanTable;
-import com.sun.image.codec.jpeg.JPEGQTable;
 import java.awt.color.ColorSpace;
 import java.awt.image.ColorModel;
 import java.util.Enumeration;
 import java.util.Vector;
+
+import com.sun.image.codec.jpeg.JPEGDecodeParam;
+import com.sun.image.codec.jpeg.JPEGEncodeParam;
+import com.sun.image.codec.jpeg.JPEGHuffmanTable;
+import com.sun.image.codec.jpeg.JPEGQTable;
 
 public class JPEGParam implements JPEGEncodeParam, Cloneable {
 	private static int[] defComponents = new int[]{-1, 1, 3, 3, 4, 3, 4, 4, 4, 4, 4, 4};

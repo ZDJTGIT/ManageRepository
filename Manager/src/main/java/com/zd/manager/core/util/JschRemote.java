@@ -1,5 +1,6 @@
 package com.zd.manager.core.util;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -15,18 +16,27 @@ import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 import com.jcraft.jsch.SftpException;
+import com.zd.manager.core.config.MultipartConfig;
 
 @Component
 public class JschRemote {
-
+	private static Properties prop = new Properties();
+	
+	public JschRemote() {
+		try {
+			prop.load(MultipartConfig.class.getClassLoader().getResourceAsStream("manager.properties"));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public static final Logger logger = LoggerFactory
 			.getLogger(JschRemote.class);
 
 	private JSch jsch;
 	private Session session;
-
-//	private static final String image_directory = "/data/cbs02/mnt/monitor/images/test";
-	private static final String image_directory = "/data/cbs02/mnt/monitor/images";
 
 	/**
 	 * 连接到指定的IP的服务器
@@ -137,7 +147,7 @@ public class JschRemote {
 		try {
 			channelSftp = (ChannelSftp) session.openChannel("sftp");
 			channelSftp.connect();
-			channelSftp.cd(image_directory);
+			channelSftp.cd(prop.getProperty("image_directory"));
 			fs = uploadFile.getInputStream();
 			channelSftp.put(fs, newFileName);
 		} catch (JSchException e) {
@@ -160,6 +170,31 @@ public class JschRemote {
 		}
 	}
 
+	public void upload(InputStream is,String dst) {
+		ChannelSftp channelSftp = null;
+		try {
+			channelSftp = (ChannelSftp) session.openChannel("sftp");
+			channelSftp.connect();
+			channelSftp.cd(prop.getProperty("image_directory"));
+			channelSftp.put(is, dst);
+		} catch (JSchException e) {
+			logger.error("打开sftp通道失败：" + e.getMessage());
+		} catch (SftpException e) {
+			logger.error("使用sftp通道异常：" + e.getMessage());
+		} finally {
+			try {
+				if (null != channelSftp && channelSftp.isConnected()) {
+					channelSftp.disconnect();
+				}
+				if (null != is) {
+					is.close();
+				}
+			} catch (IOException e) {
+				logger.error("IO异常：" + e.getMessage());
+			}
+		}
+	}
+	
 	/**
 	 * 
 	 * @param directory
@@ -287,7 +322,7 @@ public class JschRemote {
 		try {
 			channelSftp = (ChannelSftp) session.openChannel("sftp");
 			channelSftp.connect();
-			vector = channelSftp.ls(image_directory);
+			vector = channelSftp.ls(prop.getProperty("image_directory"));
 		} catch (JSchException e) {
 			logger.error("打开sftp通道失败：" + e.getMessage());
 		} catch (SftpException e) {

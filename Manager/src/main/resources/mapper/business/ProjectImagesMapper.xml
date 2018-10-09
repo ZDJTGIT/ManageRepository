@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zd.manager.business.mapper.ProjectImagesMapper">
+  <resultMap id="BaseResultMap" type="com.zd.manager.business.model.ProjectImages">
+    <id column="project_image_id" jdbcType="INTEGER" property="projectImageId" />
+    <result column="thumbnail_path" jdbcType="VARCHAR" property="thumbnailPath" />
+    <result column="original_path" jdbcType="VARCHAR" property="originalPath" />
+    <result column="origin_length" jdbcType="DOUBLE" property="originLength" />
+    <result column="origin_width" jdbcType="DOUBLE" property="originWidth" />
+    <result column="thumbnail_length" jdbcType="DOUBLE" property="thumbnailLength" />
+    <result column="thumbnail_width" jdbcType="DOUBLE" property="thumbnailWidth" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    project_image_id, thumbnail_path, original_path, origin_length, origin_width, thumbnail_length, 
+    thumbnail_width, description
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from project_images
+    where project_image_id = #{projectImageId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from project_images
+    where project_image_id = #{projectImageId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zd.manager.business.model.ProjectImages" useGeneratedKeys="true" keyProperty="projectImageId">
+    insert into project_images (project_image_id, thumbnail_path, original_path, 
+      origin_length, origin_width, thumbnail_length, 
+      thumbnail_width, description)
+    values (#{projectImageId,jdbcType=INTEGER}, #{thumbnailPath,jdbcType=VARCHAR}, #{originalPath,jdbcType=VARCHAR}, 
+      #{originLength,jdbcType=DOUBLE}, #{originWidth,jdbcType=DOUBLE}, #{thumbnailLength,jdbcType=DOUBLE}, 
+      #{thumbnailWidth,jdbcType=DOUBLE}, #{description,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zd.manager.business.model.ProjectImages">
+    insert into project_images
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="projectImageId != null">
+        project_image_id,
+      </if>
+      <if test="thumbnailPath != null">
+        thumbnail_path,
+      </if>
+      <if test="originalPath != null">
+        original_path,
+      </if>
+      <if test="originLength != null">
+        origin_length,
+      </if>
+      <if test="originWidth != null">
+        origin_width,
+      </if>
+      <if test="thumbnailLength != null">
+        thumbnail_length,
+      </if>
+      <if test="thumbnailWidth != null">
+        thumbnail_width,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="projectImageId != null">
+        #{projectImageId,jdbcType=INTEGER},
+      </if>
+      <if test="thumbnailPath != null">
+        #{thumbnailPath,jdbcType=VARCHAR},
+      </if>
+      <if test="originalPath != null">
+        #{originalPath,jdbcType=VARCHAR},
+      </if>
+      <if test="originLength != null">
+        #{originLength,jdbcType=DOUBLE},
+      </if>
+      <if test="originWidth != null">
+        #{originWidth,jdbcType=DOUBLE},
+      </if>
+      <if test="thumbnailLength != null">
+        #{thumbnailLength,jdbcType=DOUBLE},
+      </if>
+      <if test="thumbnailWidth != null">
+        #{thumbnailWidth,jdbcType=DOUBLE},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zd.manager.business.model.ProjectImages">
+    update project_images
+    <set>
+      <if test="thumbnailPath != null">
+        thumbnail_path = #{thumbnailPath,jdbcType=VARCHAR},
+      </if>
+      <if test="originalPath != null">
+        original_path = #{originalPath,jdbcType=VARCHAR},
+      </if>
+      <if test="originLength != null">
+        origin_length = #{originLength,jdbcType=DOUBLE},
+      </if>
+      <if test="originWidth != null">
+        origin_width = #{originWidth,jdbcType=DOUBLE},
+      </if>
+      <if test="thumbnailLength != null">
+        thumbnail_length = #{thumbnailLength,jdbcType=DOUBLE},
+      </if>
+      <if test="thumbnailWidth != null">
+        thumbnail_width = #{thumbnailWidth,jdbcType=DOUBLE},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where project_image_id = #{projectImageId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zd.manager.business.model.ProjectImages">
+    update project_images
+    set thumbnail_path = #{thumbnailPath,jdbcType=VARCHAR},
+      original_path = #{originalPath,jdbcType=VARCHAR},
+      origin_length = #{originLength,jdbcType=DOUBLE},
+      origin_width = #{originWidth,jdbcType=DOUBLE},
+      thumbnail_length = #{thumbnailLength,jdbcType=DOUBLE},
+      thumbnail_width = #{thumbnailWidth,jdbcType=DOUBLE},
+      description = #{description,jdbcType=VARCHAR}
+    where project_image_id = #{projectImageId,jdbcType=INTEGER}
+  </update>
+</mapper>

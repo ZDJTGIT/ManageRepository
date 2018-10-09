@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zd.manager.business.mapper.ProjectImagesRelationMapper">
+  <resultMap id="BaseResultMap" type="com.zd.manager.business.model.ProjectImagesRelation">
+    <id column="project_images_relation_id" jdbcType="INTEGER" property="projectImagesRelationId" />
+    <result column="project_images_id" jdbcType="INTEGER" property="projectImagesId" />
+    <result column="project_id" jdbcType="INTEGER" property="projectId" />
+    <result column="image_type" jdbcType="INTEGER" property="imageType" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    project_images_relation_id, project_images_id, project_id, image_type
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from project_images_relation
+    where project_images_relation_id = #{projectImagesRelationId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from project_images_relation
+    where project_images_relation_id = #{projectImagesRelationId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zd.manager.business.model.ProjectImagesRelation">
+    insert into project_images_relation (project_images_relation_id, project_images_id, 
+      project_id, image_type)
+    values (#{projectImagesRelationId,jdbcType=INTEGER}, #{projectImagesId,jdbcType=INTEGER}, 
+      #{projectId,jdbcType=INTEGER}, #{imageType,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zd.manager.business.model.ProjectImagesRelation">
+    insert into project_images_relation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="projectImagesRelationId != null">
+        project_images_relation_id,
+      </if>
+      <if test="projectImagesId != null">
+        project_images_id,
+      </if>
+      <if test="projectId != null">
+        project_id,
+      </if>
+      <if test="imageType != null">
+        image_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="projectImagesRelationId != null">
+        #{projectImagesRelationId,jdbcType=INTEGER},
+      </if>
+      <if test="projectImagesId != null">
+        #{projectImagesId,jdbcType=INTEGER},
+      </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="imageType != null">
+        #{imageType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zd.manager.business.model.ProjectImagesRelation">
+    update project_images_relation
+    <set>
+      <if test="projectImagesId != null">
+        project_images_id = #{projectImagesId,jdbcType=INTEGER},
+      </if>
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="imageType != null">
+        image_type = #{imageType,jdbcType=INTEGER},
+      </if>
+    </set>
+    where project_images_relation_id = #{projectImagesRelationId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zd.manager.business.model.ProjectImagesRelation">
+    update project_images_relation
+    set project_images_id = #{projectImagesId,jdbcType=INTEGER},
+      project_id = #{projectId,jdbcType=INTEGER},
+      image_type = #{imageType,jdbcType=INTEGER}
+    where project_images_relation_id = #{projectImagesRelationId,jdbcType=INTEGER}
+  </update>
+</mapper>

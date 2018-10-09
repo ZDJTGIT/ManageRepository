@@ -11,8 +11,10 @@ import org.springframework.stereotype.Service;
 
 import com.zd.manager.account.mapper.UserMapper;
 import com.zd.manager.account.model.User;
+import com.zd.manager.business.mapper.AlarmLinkmanMapper;
 import com.zd.manager.business.mapper.ProjectMapper;
 import com.zd.manager.business.mapper.UserProjectMapper;
+import com.zd.manager.business.model.AlarmLinkman;
 import com.zd.manager.business.model.Project;
 import com.zd.manager.business.model.UserProject;
 import com.zd.manager.business.service.UserAndProjectService;
@@ -30,6 +32,9 @@ public class UserAndProjectServiceImp implements UserAndProjectService {
 	@Resource
 	private ProjectMapper projectMapper;
 
+	@Resource
+	private AlarmLinkmanMapper alarmLinkmanMapper;
+	
 	@Override
 	// @Cacheable(value="userProjectCache",key="#user.getUserId()")
 	public Result<List<Project>> queryProjectsByUserId(User user) {
@@ -107,10 +112,14 @@ public class UserAndProjectServiceImp implements UserAndProjectService {
 	}
 
 	@Override
-	public Result<List<User>> queryUsersByProjectId(Integer projectId) {
+	public Result<Map<String, Object>> queryUsersByProjectId(Integer projectId) {
 		List<User> userList = userProjectMapper.queryUserByProjectId(projectId);
-		Result<List<User>> result = new Result<List<User>>();
-		result.success("根据项目id查询项目下用户成功", userList);
+		List<AlarmLinkman> linkmanList = alarmLinkmanMapper.queryAlarmLinkmanByProjectId(projectId);
+		Result<Map<String, Object>> result = new Result<Map<String, Object>>();
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("users", userList);
+		map.put("alarmLinkman", linkmanList);
+		result.success("根据项目id查询项目下用户成功",map);
 		return result;
 	}
 
@@ -139,5 +148,31 @@ public class UserAndProjectServiceImp implements UserAndProjectService {
 			result.success("为用户新增项目成功");
 		}
 		return result;
+	}
+	
+	@Override
+	public Result<String> addAlarmLinkman(AlarmLinkman alarmLinkman) {
+		if(alarmLinkmanMapper.insert(alarmLinkman)>0) {
+			return new Result<String>().success("添加告警联系人成功");
+		}else {
+			return new Result<String>().success("添加告警联系人失败");
+		}
+	}
+	
+	@Override
+	public Result<String> deleteAlarmLinkman(Integer alarmLinkmanId) {
+		if(alarmLinkmanMapper.deleteByPrimaryKey(alarmLinkmanId)>0) {
+			return new Result<String>().success("删除告警联系人成功");
+		}else {
+			return new Result<String>().success("删除告警联系人失败");
+		}
+	}
+	@Override
+	public Result<String> modifyAlarmLinkman(AlarmLinkman alarmLinkman) {
+		if(alarmLinkmanMapper.updateByPrimaryKeySelective(alarmLinkman)>0) {
+			return new Result<String>().success("修改告警人成功");
+		}else {
+			return new Result<String>().success("修改告警人失败");
+		}
 	}
 }

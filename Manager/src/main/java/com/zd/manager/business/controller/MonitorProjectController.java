@@ -1,11 +1,7 @@
 package com.zd.manager.business.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
-
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -25,9 +21,15 @@ import org.springframework.web.multipart.MultipartRequest;
 import com.zd.manager.business.model.Project;
 import com.zd.manager.business.model.Sensor;
 import com.zd.manager.business.model.SensorGradiograph;
+import com.zd.manager.business.model.SysCode;
 import com.zd.manager.business.service.MonitorProjectService;
 import com.zd.manager.core.model.Result;
 import com.zd.manager.core.util.JschRemote;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 
 @Api(tags = "自动监测项目管理模块")
 @Controller
@@ -144,9 +146,9 @@ public class MonitorProjectController {
 	@ResponseBody
 	@ApiOperation(value = "新增测斜传感器--Kstar", httpMethod = "POST", response = Result.class, notes = "新增测斜传感器")
 	@ApiImplicitParam(name = "sensorGradiograph", value = "测斜传感器json", required = true, dataType = "SensorGradiograph", paramType = "form")
-	public Result<String> insertGraSensor(
-			@RequestBody SensorGradiograph sensorGradiograph) {
-		return monitorProjectService.insertGraSensor(sensorGradiograph);
+	public Result<String> insertGraSensor( @RequestBody SensorGradiograph sensorGradiograph,
+			@RequestParam("sensorDepthStr")String sensorDepthStr,@RequestParam("sensorNumberStr")String sensorNumberStr) {
+		return monitorProjectService.insertGraSensor(sensorGradiograph,sensorDepthStr,sensorNumberStr);
 	}
 
 	@PostMapping("/modifySensor")
@@ -180,5 +182,33 @@ public class MonitorProjectController {
 	@ApiImplicitParam(name = "sensorId", value = "传感器Id", required = true, dataType = "Sensor", paramType = "query")
 	public Result<String> deleteGraSensorBySonsor(@RequestParam Integer sensorId) {
 		return monitorProjectService.deleteGraSensorBySensorId(sensorId);
+	}
+	
+	@PostMapping("/uploadPicture")
+	@ResponseBody
+	public Result<String> uploadPicture(@RequestParam("files")MultipartFile[] files,@RequestParam("descriptions")String[] descriptions,
+			@RequestParam("imageType")Integer imageType,@RequestParam("projectId")Integer projectId){
+		return monitorProjectService.uploadPicture(files,descriptions,imageType,projectId);
+	}
+	
+	@ResponseBody
+	@ApiOperation(value = "查询图片类型--Kstar", httpMethod = "GET", response = Result.class, notes = "查询图片类型")
+	@GetMapping("/getImageType")
+	public Result<List<SysCode>> getImageType(){
+		return monitorProjectService.getImageType();
+	}
+	
+	@ResponseBody
+	@PostMapping("/uploadAndroidPicture")
+	public Result<String> uploadAndroidPicture(@RequestParam("files")MultipartFile[] files,@RequestParam("descriptions")String[] descriptions,
+			@RequestParam("projectId")Integer projectId,@RequestParam("imageType")Integer imageType){
+		return monitorProjectService.uploadAndroidPicture(files,descriptions,projectId,imageType);
+	}
+	
+	@ResponseBody
+	@GetMapping("/getAndroidImageType")
+	@ApiOperation(value = "获取安卓图片类型--Kstar", httpMethod = "GET", response = Result.class, notes = "获取安卓图片类型")
+	public Result<List<SysCode>> getAndroidImageType(){
+		return monitorProjectService.getAndroidImageType();
 	}
 }

@@ -164,7 +164,12 @@
 		    <artifactId>jsch</artifactId>
 		    <version>0.1.54</version>
 		</dependency>
-
+		<!-- 缩略图 -->
+		<dependency>
+		    <groupId>net.coobird</groupId>
+		    <artifactId>thumbnailator</artifactId>
+		    <version>0.4.8</version>
+		</dependency>
 	</dependencies>
 
     

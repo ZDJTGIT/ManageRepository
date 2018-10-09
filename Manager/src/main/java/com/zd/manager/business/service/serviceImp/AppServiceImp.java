@@ -1,8 +1,11 @@
 package com.zd.manager.business.service.serviceImp;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -16,14 +19,24 @@ import com.zd.manager.business.mapper.ShowImageMapper;
 import com.zd.manager.business.model.Project;
 import com.zd.manager.business.model.ShowImage;
 import com.zd.manager.business.service.AppService;
+import com.zd.manager.core.config.MultipartConfig;
 import com.zd.manager.core.model.Result;
 import com.zd.manager.core.util.JschRemote;
 
 @Service
 public class AppServiceImp implements AppService {
 	
-//	private static final String image_directory = "/data/cbs02/mnt/monitor/images/test";
-	private static final String image_directory = "/data/cbs02/mnt/monitor/images";
+	private static Properties prop = new Properties();
+	
+	public AppServiceImp() {
+		try {
+			prop.load(MultipartConfig.class.getClassLoader().getResourceAsStream("manager.properties"));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	@Resource
 	private JschRemote jschRemote;
@@ -47,8 +60,9 @@ public class AppServiceImp implements AppService {
 			ShowImage showImage = new ShowImage();
 			showImage.setDescription(description[i]);
 			showImage.setPriority(priority[i]);
-			showImage.setUrl(image_directory+"/"+upName);
+			showImage.setUrl(prop.getProperty("image_directory")+"/"+upName);
 			showImageMapper.insert(showImage);
+			jschRemote.close();
 		}
 		return new Result<String>().success("上传图片完成");
 	}

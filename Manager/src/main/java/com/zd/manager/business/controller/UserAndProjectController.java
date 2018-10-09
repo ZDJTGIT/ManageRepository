@@ -15,12 +15,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zd.manager.account.model.User;
+import com.zd.manager.business.model.AlarmLinkman;
 import com.zd.manager.business.model.Project;
 import com.zd.manager.business.service.UserAndProjectService;
 import com.zd.manager.core.model.Result;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 
 @Api(tags="用户项目关系接口")
@@ -87,8 +89,8 @@ public class UserAndProjectController {
 	@ResponseBody
 	@ApiOperation(value="根据项目id查询项目下所有用户--Kstar",httpMethod="GET",response=Result.class,notes="根据项目id查询项目下所有用户")
 	@ApiImplicitParam(name="projectId",value="项目Id",required=true,dataType="Integer",paramType="query")
-	public Result<List<User>> queryUsertByProjectId(@RequestParam Integer projectId) {
-		Result<List<User>> result = userAndProjectService.queryUsersByProjectId(projectId);
+	public Result<Map<String,Object>> queryUsertByProjectId(@RequestParam Integer projectId) {
+		Result<Map<String,Object>> result = userAndProjectService.queryUsersByProjectId(projectId);
 		return result;
 	}
 	
@@ -112,7 +114,35 @@ public class UserAndProjectController {
 	@DeleteMapping("/deleteUserForProject")
 	@ResponseBody
 	@ApiOperation(value="通过用户id删除项目管理者--Kstar",httpMethod="DELETE",response=Result.class,notes="通过用户id删除项目管理者")
+	@ApiImplicitParams({
+		@ApiImplicitParam(name="projectId",value="项目Id",required=true,dataType="Integer",paramType="query"),
+		@ApiImplicitParam(name="userId",value="用户Id",required=true,dataType="Integer",paramType="query")
+	})
 	public Result<String> deleteUserForProject(@RequestParam Integer projectId,@RequestParam Integer userId){
 		return userAndProjectService.deleteProject(userId,projectId);
+	}
+	
+	@ResponseBody
+	@PostMapping("/addAlarmLinkman")
+	@ApiOperation(value="添加告警联系人--Kstar",httpMethod="POST",response=Result.class,notes="通过实体信息添加告警联系人")
+	@ApiImplicitParam(name="alarmLinkman",value="告警人实体",required=true,dataType="AlarmLinkman",paramType="body")
+	public Result<String> addAlarmLinkman(@RequestBody AlarmLinkman alarmLinkman){
+		return userAndProjectService.addAlarmLinkman(alarmLinkman);
+	}
+	
+	@ResponseBody
+	@DeleteMapping("/deleteAlarmLinkman")
+	@ApiOperation(value="删除告警联系人--Kstar",httpMethod="DELETE",response=Result.class,notes="通过告警联系人id删除告警联系人")
+	@ApiImplicitParam(name="alarmLinkmanId",value="告警人id",required=true,dataType="Integer",paramType="query")
+	public Result<String> deleteAlarmLinkman(Integer alarmLinkmanId){
+		return userAndProjectService.deleteAlarmLinkman(alarmLinkmanId);
+	}
+	
+	@ResponseBody
+	@PostMapping("/modifyAlarmLinkman")
+	@ApiOperation(value="修改告警联系人--Kstar",httpMethod="POST",response=Result.class,notes="通过告警联系人修改告警联系人")
+	@ApiImplicitParam(name="alarmLinkman",value="告警人实体",required=true,dataType="AlarmLinkman",paramType="body")
+	public Result<String> modifyAlarmLinkman(@RequestBody AlarmLinkman alarmLinkman){
+		return userAndProjectService.modifyAlarmLinkman(alarmLinkman);
 	}
 }

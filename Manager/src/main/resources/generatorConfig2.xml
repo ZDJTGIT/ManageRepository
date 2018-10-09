@@ -7,11 +7,12 @@
         <property name="suppressDate" value="true"/>
         <property name="suppressAllComments" value="true" />
 	</commentGenerator>
-    <jdbcConnection connectionURL="jdbc:mysql://123.207.39.209:3306/monitorTest" driverClass="com.mysql.jdbc.Driver" password="hnzdjc@" userId="dba" />
+	<jdbcConnection connectionURL="jdbc:mysql://localhost:3306/mymonitor" driverClass="com.mysql.jdbc.Driver" password="root" userId="root" />
+<!--     <jdbcConnection connectionURL="jdbc:mysql://123.207.39.209:3306/monitor_test" driverClass="com.mysql.jdbc.Driver" password="hnzdjc@" userId="dba" /> -->
     <javaModelGenerator targetPackage="com.zd.manager.business.model" targetProject="Manager/src/main/java" />
     <sqlMapGenerator targetPackage="mapper.business" targetProject="Manager/src/main/resources" />
     <javaClientGenerator targetPackage="com.zd.manager.business.mapper" targetProject="Manager/src/main/java" type="XMLMAPPER" />
-    	<table tableName="sensor_gradiograph" domainObjectName="SensorGradiograph" enableCountByExample="false" enableUpdateByExample="false"
+    	<table tableName="project_images" domainObjectName="ProjectImages" enableCountByExample="false" enableUpdateByExample="false"
         enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
     	<!-- <table tableName="show_image" domainObjectName="ShowImage" enableCountByExample="false" enableUpdateByExample="false"
         enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>

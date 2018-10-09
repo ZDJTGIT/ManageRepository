@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.zd.manager.account.model.User;
+import com.zd.manager.business.model.AlarmLinkman;
 import com.zd.manager.business.model.Project;
 import com.zd.manager.core.model.Result;
 
@@ -48,7 +49,7 @@ public interface UserAndProjectService {
 	 * @param projectId
 	 * @return
 	 */
-	public Result<List<User>> queryUsersByProjectId(Integer projectId);
+	public Result<Map<String, Object>> queryUsersByProjectId(Integer projectId);
 	
 	/**
 	 * 根据项目id查询项目下未拥有用户
@@ -63,5 +64,26 @@ public interface UserAndProjectService {
 	 * @return
 	 */
 	public Result<String> addUserToProject(List<String> list);
+	
+	/**
+	 *通过实体添加告警人 
+	 * @param alarmLinkman
+	 * @return
+	 */
+	public Result<String> addAlarmLinkman(AlarmLinkman alarmLinkman);
+	
+	/**
+	 * 删除告警联系人
+	 * @param alarmLinkmanId
+	 * @return
+	 */
+	public Result<String> deleteAlarmLinkman(Integer alarmLinkmanId);
+	
+	/**
+	 * 修改告警联系人
+	 * @param alarmLinkman
+	 * @return
+	 */
+	public Result<String> modifyAlarmLinkman(AlarmLinkman alarmLinkman);
 	
 }

@@ -1,9 +1,5 @@
 package com.zd.manager.account.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiOperation;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,11 +13,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.zd.manager.account.model.User;
+import com.zd.manager.account.model.LoginEntity;
 import com.zd.manager.account.service.TokenService;
 import com.zd.manager.account.service.UserService;
-import com.zd.manager.core.exception.ForbiddenException;
 import com.zd.manager.core.model.Result;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 
 /**
  * @author Kstar:
@@ -30,7 +29,7 @@ import com.zd.manager.core.model.Result;
  */
 @Api
 @Controller
-@RequestMapping("/manager/user")
+@RequestMapping("/user")
 public class UserController {
 	public static final Logger logger = LoggerFactory
 			.getLogger(UserController.class);
@@ -44,25 +43,37 @@ public class UserController {
 	@PostMapping("/login")
 	@ApiOperation(value = "登陆操作--Kstar", httpMethod = "POST", response = Result.class, notes = "根据用户名和密码登陆")
 	@ApiImplicitParam(name = "user", value = "用户对象", required = true, dataType = "User", paramType = "form")
-	public Result<String> login(@RequestBody User user) {
-		String userName = user.getUserName();
-		String password = user.getPassword();
-		if (userName == null || password == null) {
-			throw new ForbiddenException("用户名或密码为空");
+	public Result<Map<String,String>> login(@RequestBody LoginEntity user) {
+		Map<String,String> map = new HashMap<String,String>();
+		if("admin".equals(user.getUserName())&&"hnzdjc".equals(user.getPassword())) {
+			map.put("status", "ok");
+			map.put("type", "account");
+			map.put("currentAuthority", "admin");
+			return new Result<Map<String,String>>().success("登陆成功",map);
+		}else {
+			map.put("status", "error");
+			map.put("type", "account");
+			map.put("currentAuthority", "guest");
+			return new Result<Map<String,String>>().success("登陆失败",map);
 		}
-		Result<String> result = userService.login(userName, password);
-		if (result.getCode() == Result.SUCCESS) {
-			Map<String, Object> claims = new HashMap<String, Object>();
-			claims.put("userId", result.getData());
-			claims.put("userName", userName);
-			// 创建token
-			String token = tokenService.createToken(claims, password);
-			logger.debug(userName + " 用户登陆生成的token: " + token);
-			result.setData(token);
-		} else {
-			result.setMsg("登陆失败，" + result.getMsg());
-		}
-		return result;
+//		String userName = user.getUserName();
+//		String password = user.getPassword();
+//		if (userName == null || password == null) {
+//			throw new ForbiddenException("用户名或密码为空");
+//		}
+//		Result<String> result = userService.login(userName, password);
+//		if (result.getCode() == Result.SUCCESS) {
+//			Map<String, Object> claims = new HashMap<String, Object>();
+//			claims.put("userId", result.getData());
+//			claims.put("userName", userName);
+//			// 创建token
+//			String token = tokenService.createToken(claims, password);
+//			logger.debug(userName + " 用户登陆生成的token: " + token);
+//			result.setData(token);
+//		} else {
+//			result.setMsg("登陆失败，" + result.getMsg());
+//		}
+//		return result;
 
 	}
 

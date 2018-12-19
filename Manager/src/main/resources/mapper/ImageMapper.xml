@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zdjc.mapper.ImageMapper">
+  <resultMap id="BaseResultMap" type="com.zdjc.entity.Image">
+    <result column="image_id" jdbcType="INTEGER" property="imageId" />
+    <result column="image_url" jdbcType="VARCHAR" property="imageUrl" />
+    <result column="image_width" jdbcType="INTEGER" property="imageWidth" />
+    <result column="image_height" jdbcType="INTEGER" property="imageHeight" />
+    <result column="image_type" jdbcType="INTEGER" property="imageType" />
+    <result column="image_description" jdbcType="VARCHAR" property="imageDescription" />
+  </resultMap>
+  <insert id="insert" parameterType="com.zdjc.entity.Image">
+    insert into image (image_id, image_url, image_width, 
+      image_height, image_type, image_description
+      )
+    values (#{imageId,jdbcType=INTEGER}, #{imageUrl,jdbcType=VARCHAR}, #{imageWidth,jdbcType=INTEGER}, 
+      #{imageHeight,jdbcType=INTEGER}, #{imageType,jdbcType=INTEGER}, #{imageDescription,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zdjc.entity.Image">
+    insert into image
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="imageId != null">
+        image_id,
+      </if>
+      <if test="imageUrl != null">
+        image_url,
+      </if>
+      <if test="imageWidth != null">
+        image_width,
+      </if>
+      <if test="imageHeight != null">
+        image_height,
+      </if>
+      <if test="imageType != null">
+        image_type,
+      </if>
+      <if test="imageDescription != null">
+        image_description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="imageId != null">
+        #{imageId,jdbcType=INTEGER},
+      </if>
+      <if test="imageUrl != null">
+        #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="imageWidth != null">
+        #{imageWidth,jdbcType=INTEGER},
+      </if>
+      <if test="imageHeight != null">
+        #{imageHeight,jdbcType=INTEGER},
+      </if>
+      <if test="imageType != null">
+        #{imageType,jdbcType=INTEGER},
+      </if>
+      <if test="imageDescription != null">
+        #{imageDescription,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

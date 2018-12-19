@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zdjc.mapper.DeviceConfigMapper">
+  <resultMap id="BaseResultMap" type="com.zdjc.entity.DeviceConfig">
+    <result column="dc_id" jdbcType="INTEGER" property="dcId" />
+    <result column="terminal_number" jdbcType="VARCHAR" property="terminalNumber" />
+    <result column="terminal_channel" jdbcType="VARCHAR" property="terminalChannel" />
+    <result column="sensor_number" jdbcType="VARCHAR" property="sensorNumber" />
+    <result column="monitor_point_number" jdbcType="VARCHAR" property="monitorPointNumber" />
+    <result column="monitor_type" jdbcType="INTEGER" property="monitorType" />
+  </resultMap>
+  <insert id="insert" parameterType="com.zdjc.entity.DeviceConfig">
+    insert into device_config (dc_id, terminal_number, terminal_channel, 
+      sensor_number, monitor_point_number, monitor_type
+      )
+    values (#{dcId,jdbcType=INTEGER}, #{terminalNumber,jdbcType=VARCHAR}, #{terminalChannel,jdbcType=VARCHAR}, 
+      #{sensorNumber,jdbcType=VARCHAR}, #{monitorPointNumber,jdbcType=VARCHAR}, #{monitorType,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zdjc.entity.DeviceConfig">
+    insert into device_config
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dcId != null">
+        dc_id,
+      </if>
+      <if test="terminalNumber != null">
+        terminal_number,
+      </if>
+      <if test="terminalChannel != null">
+        terminal_channel,
+      </if>
+      <if test="sensorNumber != null">
+        sensor_number,
+      </if>
+      <if test="monitorPointNumber != null">
+        monitor_point_number,
+      </if>
+      <if test="monitorType != null">
+        monitor_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dcId != null">
+        #{dcId,jdbcType=INTEGER},
+      </if>
+      <if test="terminalNumber != null">
+        #{terminalNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalChannel != null">
+        #{terminalChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="sensorNumber != null">
+        #{sensorNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="monitorPointNumber != null">
+        #{monitorPointNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="monitorType != null">
+        #{monitorType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

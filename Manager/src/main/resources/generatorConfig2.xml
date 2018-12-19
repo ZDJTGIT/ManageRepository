@@ -1,40 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
-  <classPathEntry location="C:/Users/11435/.m2/repository/mysql/mysql-connector-java/5.1.41/mysql-connector-java-5.1.41.jar"/>
+<classPathEntry location="C:/Users/11435/.m2/repository/mysql/mysql-connector-java/5.1.41/mysql-connector-java-5.1.41.jar"/>
   <context id="context1">
   	<commentGenerator>
         <property name="suppressDate" value="true"/>
         <property name="suppressAllComments" value="true" />
 	</commentGenerator>
-	<jdbcConnection connectionURL="jdbc:mysql://localhost:3306/mymonitor" driverClass="com.mysql.jdbc.Driver" password="root" userId="root" />
-<!--     <jdbcConnection connectionURL="jdbc:mysql://123.207.39.209:3306/monitor_test" driverClass="com.mysql.jdbc.Driver" password="hnzdjc@" userId="dba" /> -->
-    <javaModelGenerator targetPackage="com.zd.manager.business.model" targetProject="Manager/src/main/java" />
-    <sqlMapGenerator targetPackage="mapper.business" targetProject="Manager/src/main/resources" />
-    <javaClientGenerator targetPackage="com.zd.manager.business.mapper" targetProject="Manager/src/main/java" type="XMLMAPPER" />
-    	<table tableName="project_images" domainObjectName="ProjectImages" enableCountByExample="false" enableUpdateByExample="false"
+    <jdbcConnection connectionURL="jdbc:mysql://123.207.88.210:3306/monitor?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=true&amp;serverTimezone=UTC" driverClass="com.mysql.cj.jdbc.Driver" password="zdjc@znyjy" userId="znyjy" />
+    <javaModelGenerator targetPackage="com.zdjc.entity" targetProject="Manager3.0/src/main/java" />
+    <sqlMapGenerator targetPackage="mapper" targetProject="Manager3.0/src/main/resources" />
+    <javaClientGenerator targetPackage="com.zdjc.mapper" targetProject="Manager3.0/src/main/java" type="XMLMAPPER" />
+    <table tableName="project" domainObjectName="Project" enableCountByExample="false" enableUpdateByExample="false"
         enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-    	<!-- <table tableName="show_image" domainObjectName="ShowImage" enableCountByExample="false" enableUpdateByExample="false"
+    <!-- <table tableName="member" domainObjectName="Member" enableCountByExample="false" enableUpdateByExample="false"
         enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="project" domainObjectName="Project" enableCountByExample="false" enableUpdateByExample="false"
+    <table tableName="project" domainObjectName="Project" enableCountByExample="false" enableUpdateByExample="false"
         enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-    	<table tableName="sensor" domainObjectName="Sensor" enableCountByExample="false" enableUpdateByExample="false"
+    <table tableName="sector" domainObjectName="Sector" enableCountByExample="false" enableUpdateByExample="false"
         enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-    	<table tableName="statistic_chart" domainObjectName="StatisticChart" enableCountByExample="false" enableUpdateByExample="false"
+    <table tableName="sector_member" domainObjectName="SectorMember" enableCountByExample="false" enableUpdateByExample="false"
         enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-    	<table tableName="sys_code" domainObjectName="SysCode" enableCountByExample="false" enableUpdateByExample="false"
+    <table tableName="sensor" domainObjectName="Sensor" enableCountByExample="false" enableUpdateByExample="false"
         enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-    	<table tableName="sensor_data" domainObjectName="SensorData" enableCountByExample="false" enableUpdateByExample="false"
+    <table tableName="sys_code" domainObjectName="SysCode" enableCountByExample="false" enableUpdateByExample="false"
         enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-    	<table tableName="user_project" domainObjectName="UserProject" enableCountByExample="false" enableUpdateByExample="false"
+    <table tableName="terminal" domainObjectName="Terminal" enableCountByExample="false" enableUpdateByExample="false"
         enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-    	<table tableName="terminals" domainObjectName="Terminals" enableCountByExample="false" enableUpdateByExample="false"
+    <table tableName="user" domainObjectName="User" enableCountByExample="false" enableUpdateByExample="false"
         enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-    	<table tableName="terminals_log" domainObjectName="TerminalsLog" enableCountByExample="false" enableUpdateByExample="false"
+    <table tableName="user_role" domainObjectName="UserRole" enableCountByExample="false" enableUpdateByExample="false"
         enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-    	<table tableName="terminals_project" domainObjectName="TerminalsProject" enableCountByExample="false" enableUpdateByExample="false"
+    <table tableName="user_sector" domainObjectName="UserSector" enableCountByExample="false" enableUpdateByExample="false"
         enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="sys_code" domainObjectName="SysCode" enableCountByExample="false" enableUpdateByExample="false"
+    <table tableName="sys_log" domainObjectName="SysLog" enableCountByExample="false" enableUpdateByExample="false"
+        enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    <table tableName="inventory_record" domainObjectName="InventoryRecord" enableCountByExample="false" enableUpdateByExample="false"
+        enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    <table tableName="sector_image" domainObjectName="SectorImage" enableCountByExample="false" enableUpdateByExample="false"
+        enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    <table tableName="image" domainObjectName="Image" enableCountByExample="false" enableUpdateByExample="false"
+        enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    <table tableName="permission" domainObjectName="Permission" enableCountByExample="false" enableUpdateByExample="false"
+        enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    <table tableName="role_permission" domainObjectName="RolePermission" enableCountByExample="false" enableUpdateByExample="false"
+        enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    <table tableName="device_config" domainObjectName="DeviceConfig" enableCountByExample="false" enableUpdateByExample="false"
+        enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    <table tableName="threshold" domainObjectName="Threshold" enableCountByExample="false" enableUpdateByExample="false"
+        enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    <table tableName="monitor_point" domainObjectName="MonitorPoint" enableCountByExample="false" enableUpdateByExample="false"
         enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table> -->
   </context>
 </generatorConfiguration>

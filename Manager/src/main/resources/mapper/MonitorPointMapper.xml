@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zdjc.mapper.MonitorPointMapper">
+  <resultMap id="BaseResultMap" type="com.zdjc.entity.MonitorPoint">
+    <result column="mp_id" jdbcType="INTEGER" property="mpId" />
+    <result column="sector_id" jdbcType="INTEGER" property="sectorId" />
+    <result column="monitor_point_number" jdbcType="VARCHAR" property="monitorPointNumber" />
+    <result column="monitor_type" jdbcType="INTEGER" property="monitorType" />
+    <result column="terminal_number" jdbcType="VARCHAR" property="terminalNumber" />
+    <result column="terminal_channel" jdbcType="VARCHAR" property="terminalChannel" />
+    <result column="sensor_number" jdbcType="VARCHAR" property="sensorNumber" />
+    <result column="sensor_id" jdbcType="INTEGER" property="sensorId" />
+    <result column="sensor_deep" jdbcType="REAL" property="sensorDeep" />
+  </resultMap>
+  <insert id="insert" parameterType="com.zdjc.entity.MonitorPoint">
+    insert into monitor_point (mp_id, sector_id, monitor_point_number, 
+      monitor_type, terminal_number, terminal_channel, 
+      sensor_number, sensor_id, sensor_deep
+      )
+    values (#{mpId,jdbcType=INTEGER}, #{sectorId,jdbcType=INTEGER}, #{monitorPointNumber,jdbcType=VARCHAR}, 
+      #{monitorType,jdbcType=INTEGER}, #{terminalNumber,jdbcType=VARCHAR}, #{terminalChannel,jdbcType=VARCHAR}, 
+      #{sensorNumber,jdbcType=VARCHAR}, #{sensorId,jdbcType=INTEGER}, #{sensorDeep,jdbcType=REAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zdjc.entity.MonitorPoint">
+    insert into monitor_point
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mpId != null">
+        mp_id,
+      </if>
+      <if test="sectorId != null">
+        sector_id,
+      </if>
+      <if test="monitorPointNumber != null">
+        monitor_point_number,
+      </if>
+      <if test="monitorType != null">
+        monitor_type,
+      </if>
+      <if test="terminalNumber != null">
+        terminal_number,
+      </if>
+      <if test="terminalChannel != null">
+        terminal_channel,
+      </if>
+      <if test="sensorNumber != null">
+        sensor_number,
+      </if>
+      <if test="sensorId != null">
+        sensor_id,
+      </if>
+      <if test="sensorDeep != null">
+        sensor_deep,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="mpId != null">
+        #{mpId,jdbcType=INTEGER},
+      </if>
+      <if test="sectorId != null">
+        #{sectorId,jdbcType=INTEGER},
+      </if>
+      <if test="monitorPointNumber != null">
+        #{monitorPointNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="monitorType != null">
+        #{monitorType,jdbcType=INTEGER},
+      </if>
+      <if test="terminalNumber != null">
+        #{terminalNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalChannel != null">
+        #{terminalChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="sensorNumber != null">
+        #{sensorNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="sensorId != null">
+        #{sensorId,jdbcType=INTEGER},
+      </if>
+      <if test="sensorDeep != null">
+        #{sensorDeep,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+</mapper>

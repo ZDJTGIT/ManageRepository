@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zdjc.mapper.SectorImageMapper">
+  <resultMap id="BaseResultMap" type="com.zdjc.entity.SectorImage">
+    <result column="si_id" jdbcType="INTEGER" property="siId" />
+    <result column="sector_id" jdbcType="INTEGER" property="sectorId" />
+    <result column="image_id" jdbcType="INTEGER" property="imageId" />
+    <result column="sector_image_type" jdbcType="INTEGER" property="sectorImageType" />
+    <result column="image_type" jdbcType="INTEGER" property="imageType" />
+  </resultMap>
+  <insert id="insert" parameterType="com.zdjc.entity.SectorImage">
+    insert into sector_image (si_id, sector_id, image_id, 
+      sector_image_type, image_type)
+    values (#{siId,jdbcType=INTEGER}, #{sectorId,jdbcType=INTEGER}, #{imageId,jdbcType=INTEGER}, 
+      #{sectorImageType,jdbcType=INTEGER}, #{imageType,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zdjc.entity.SectorImage">
+    insert into sector_image
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="siId != null">
+        si_id,
+      </if>
+      <if test="sectorId != null">
+        sector_id,
+      </if>
+      <if test="imageId != null">
+        image_id,
+      </if>
+      <if test="sectorImageType != null">
+        sector_image_type,
+      </if>
+      <if test="imageType != null">
+        image_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="siId != null">
+        #{siId,jdbcType=INTEGER},
+      </if>
+      <if test="sectorId != null">
+        #{sectorId,jdbcType=INTEGER},
+      </if>
+      <if test="imageId != null">
+        #{imageId,jdbcType=INTEGER},
+      </if>
+      <if test="sectorImageType != null">
+        #{sectorImageType,jdbcType=INTEGER},
+      </if>
+      <if test="imageType != null">
+        #{imageType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

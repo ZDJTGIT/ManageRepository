@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zdjc.mapper.ThresholdMapper">
+  <resultMap id="BaseResultMap" type="com.zdjc.entity.Threshold">
+    <result column="threshold_id" jdbcType="INTEGER" property="thresholdId" />
+    <result column="sector_id" jdbcType="INTEGER" property="sectorId" />
+    <result column="sector_type" jdbcType="INTEGER" property="sectorType" />
+    <result column="monitor_type" jdbcType="INTEGER" property="monitorType" />
+    <result column="threshold_type" jdbcType="INTEGER" property="thresholdType" />
+    <result column="min_threshold_value" jdbcType="DECIMAL" property="minThresholdValue" />
+    <result column="max_threshold_value" jdbcType="DOUBLE" property="maxThresholdValue" />
+    <result column="min_drastic_threshold_value" jdbcType="DOUBLE" property="minDrasticThresholdValue" />
+    <result column="max_drastic_threshold_value" jdbcType="DOUBLE" property="maxDrasticThresholdValue" />
+  </resultMap>
+  <insert id="insert" parameterType="com.zdjc.entity.Threshold">
+    insert into threshold (threshold_id, sector_id, sector_type, 
+      monitor_type, threshold_type, min_threshold_value, 
+      max_threshold_value, min_drastic_threshold_value, 
+      max_drastic_threshold_value)
+    values (#{thresholdId,jdbcType=INTEGER}, #{sectorId,jdbcType=INTEGER}, #{sectorType,jdbcType=INTEGER}, 
+      #{monitorType,jdbcType=INTEGER}, #{thresholdType,jdbcType=INTEGER}, #{minThresholdValue,jdbcType=DECIMAL}, 
+      #{maxThresholdValue,jdbcType=DOUBLE}, #{minDrasticThresholdValue,jdbcType=DOUBLE}, 
+      #{maxDrasticThresholdValue,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zdjc.entity.Threshold">
+    insert into threshold
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="thresholdId != null">
+        threshold_id,
+      </if>
+      <if test="sectorId != null">
+        sector_id,
+      </if>
+      <if test="sectorType != null">
+        sector_type,
+      </if>
+      <if test="monitorType != null">
+        monitor_type,
+      </if>
+      <if test="thresholdType != null">
+        threshold_type,
+      </if>
+      <if test="minThresholdValue != null">
+        min_threshold_value,
+      </if>
+      <if test="maxThresholdValue != null">
+        max_threshold_value,
+      </if>
+      <if test="minDrasticThresholdValue != null">
+        min_drastic_threshold_value,
+      </if>
+      <if test="maxDrasticThresholdValue != null">
+        max_drastic_threshold_value,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="thresholdId != null">
+        #{thresholdId,jdbcType=INTEGER},
+      </if>
+      <if test="sectorId != null">
+        #{sectorId,jdbcType=INTEGER},
+      </if>
+      <if test="sectorType != null">
+        #{sectorType,jdbcType=INTEGER},
+      </if>
+      <if test="monitorType != null">
+        #{monitorType,jdbcType=INTEGER},
+      </if>
+      <if test="thresholdType != null">
+        #{thresholdType,jdbcType=INTEGER},
+      </if>
+      <if test="minThresholdValue != null">
+        #{minThresholdValue,jdbcType=DECIMAL},
+      </if>
+      <if test="maxThresholdValue != null">
+        #{maxThresholdValue,jdbcType=DOUBLE},
+      </if>
+      <if test="minDrasticThresholdValue != null">
+        #{minDrasticThresholdValue,jdbcType=DOUBLE},
+      </if>
+      <if test="maxDrasticThresholdValue != null">
+        #{maxDrasticThresholdValue,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+</mapper>

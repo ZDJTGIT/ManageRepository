@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zdjc.mapper.TerminalMapper">
+  <resultMap id="BaseResultMap" type="com.zdjc.entity.Terminal">
+    <result column="terminal_id" jdbcType="INTEGER" property="terminalId" />
+    <result column="terminal_number" jdbcType="VARCHAR" property="terminalNumber" />
+    <result column="manufacturer" jdbcType="VARCHAR" property="manufacturer" />
+    <result column="terminal_model" jdbcType="VARCHAR" property="terminalModel" />
+    <result column="terminal_name" jdbcType="VARCHAR" property="terminalName" />
+    <result column="voltage" jdbcType="INTEGER" property="voltage" />
+    <result column="channel_number" jdbcType="INTEGER" property="channelNumber" />
+    <result column="product_date" jdbcType="DATE" property="productDate" />
+    <result column="end_date" jdbcType="DATE" property="endDate" />
+    <result column="terminal_status" jdbcType="INTEGER" property="terminalStatus" />
+  </resultMap>
+  <insert id="insert" parameterType="com.zdjc.entity.Terminal">
+    insert into terminal (terminal_id, terminal_number, manufacturer, 
+      terminal_model, terminal_name, voltage, 
+      channel_number, product_date, end_date, 
+      terminal_status)
+    values (#{terminalId,jdbcType=INTEGER}, #{terminalNumber,jdbcType=VARCHAR}, #{manufacturer,jdbcType=VARCHAR}, 
+      #{terminalModel,jdbcType=VARCHAR}, #{terminalName,jdbcType=VARCHAR}, #{voltage,jdbcType=INTEGER}, 
+      #{channelNumber,jdbcType=INTEGER}, #{productDate,jdbcType=DATE}, #{endDate,jdbcType=DATE}, 
+      #{terminalStatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zdjc.entity.Terminal">
+    insert into terminal
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="terminalId != null">
+        terminal_id,
+      </if>
+      <if test="terminalNumber != null">
+        terminal_number,
+      </if>
+      <if test="manufacturer != null">
+        manufacturer,
+      </if>
+      <if test="terminalModel != null">
+        terminal_model,
+      </if>
+      <if test="terminalName != null">
+        terminal_name,
+      </if>
+      <if test="voltage != null">
+        voltage,
+      </if>
+      <if test="channelNumber != null">
+        channel_number,
+      </if>
+      <if test="productDate != null">
+        product_date,
+      </if>
+      <if test="endDate != null">
+        end_date,
+      </if>
+      <if test="terminalStatus != null">
+        terminal_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="terminalId != null">
+        #{terminalId,jdbcType=INTEGER},
+      </if>
+      <if test="terminalNumber != null">
+        #{terminalNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="manufacturer != null">
+        #{manufacturer,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalModel != null">
+        #{terminalModel,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalName != null">
+        #{terminalName,jdbcType=VARCHAR},
+      </if>
+      <if test="voltage != null">
+        #{voltage,jdbcType=INTEGER},
+      </if>
+      <if test="channelNumber != null">
+        #{channelNumber,jdbcType=INTEGER},
+      </if>
+      <if test="productDate != null">
+        #{productDate,jdbcType=DATE},
+      </if>
+      <if test="endDate != null">
+        #{endDate,jdbcType=DATE},
+      </if>
+      <if test="terminalStatus != null">
+        #{terminalStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

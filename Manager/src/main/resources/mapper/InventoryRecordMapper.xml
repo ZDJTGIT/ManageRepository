@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zdjc.mapper.InventoryRecordMapper">
+  <resultMap id="BaseResultMap" type="com.zdjc.entity.InventoryRecord">
+    <result column="ir_id" jdbcType="INTEGER" property="irId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="device_number" jdbcType="VARCHAR" property="deviceNumber" />
+    <result column="device_type" jdbcType="INTEGER" property="deviceType" />
+    <result column="out_and_in" jdbcType="INTEGER" property="outAndIn" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+  </resultMap>
+  <insert id="insert" parameterType="com.zdjc.entity.InventoryRecord">
+    insert into inventory_record (ir_id, user_id, device_number, 
+      device_type, out_and_in, create_date
+      )
+    values (#{irId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{deviceNumber,jdbcType=VARCHAR}, 
+      #{deviceType,jdbcType=INTEGER}, #{outAndIn,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zdjc.entity.InventoryRecord">
+    insert into inventory_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="irId != null">
+        ir_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="deviceNumber != null">
+        device_number,
+      </if>
+      <if test="deviceType != null">
+        device_type,
+      </if>
+      <if test="outAndIn != null">
+        out_and_in,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="irId != null">
+        #{irId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="deviceNumber != null">
+        #{deviceNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceType != null">
+        #{deviceType,jdbcType=INTEGER},
+      </if>
+      <if test="outAndIn != null">
+        #{outAndIn,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

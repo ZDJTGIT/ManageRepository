@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zdjc.mapper.SensorMapper">
+  <resultMap id="BaseResultMap" type="com.zdjc.entity.Sensor">
+    <result column="sensor_id" jdbcType="INTEGER" property="sensorId" />
+    <result column="sensor_number" jdbcType="VARCHAR" property="sensorNumber" />
+    <result column="manufacturer" jdbcType="VARCHAR" property="manufacturer" />
+    <result column="sensor_model" jdbcType="VARCHAR" property="sensorModel" />
+    <result column="sensor_name" jdbcType="VARCHAR" property="sensorName" />
+    <result column="sensor_range" jdbcType="VARCHAR" property="sensorRange" />
+    <result column="sensor_accuracy" jdbcType="VARCHAR" property="sensorAccuracy" />
+    <result column="product_date" jdbcType="DATE" property="productDate" />
+    <result column="end_date" jdbcType="DATE" property="endDate" />
+    <result column="sensor_status" jdbcType="INTEGER" property="sensorStatus" />
+  </resultMap>
+  <insert id="insert" parameterType="com.zdjc.entity.Sensor">
+    insert into sensor (sensor_id, sensor_number, manufacturer, 
+      sensor_model, sensor_name, sensor_range, 
+      sensor_accuracy, product_date, end_date, 
+      sensor_status)
+    values (#{sensorId,jdbcType=INTEGER}, #{sensorNumber,jdbcType=VARCHAR}, #{manufacturer,jdbcType=VARCHAR}, 
+      #{sensorModel,jdbcType=VARCHAR}, #{sensorName,jdbcType=VARCHAR}, #{sensorRange,jdbcType=VARCHAR}, 
+      #{sensorAccuracy,jdbcType=VARCHAR}, #{productDate,jdbcType=DATE}, #{endDate,jdbcType=DATE}, 
+      #{sensorStatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zdjc.entity.Sensor">
+    insert into sensor
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sensorId != null">
+        sensor_id,
+      </if>
+      <if test="sensorNumber != null">
+        sensor_number,
+      </if>
+      <if test="manufacturer != null">
+        manufacturer,
+      </if>
+      <if test="sensorModel != null">
+        sensor_model,
+      </if>
+      <if test="sensorName != null">
+        sensor_name,
+      </if>
+      <if test="sensorRange != null">
+        sensor_range,
+      </if>
+      <if test="sensorAccuracy != null">
+        sensor_accuracy,
+      </if>
+      <if test="productDate != null">
+        product_date,
+      </if>
+      <if test="endDate != null">
+        end_date,
+      </if>
+      <if test="sensorStatus != null">
+        sensor_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sensorId != null">
+        #{sensorId,jdbcType=INTEGER},
+      </if>
+      <if test="sensorNumber != null">
+        #{sensorNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="manufacturer != null">
+        #{manufacturer,jdbcType=VARCHAR},
+      </if>
+      <if test="sensorModel != null">
+        #{sensorModel,jdbcType=VARCHAR},
+      </if>
+      <if test="sensorName != null">
+        #{sensorName,jdbcType=VARCHAR},
+      </if>
+      <if test="sensorRange != null">
+        #{sensorRange,jdbcType=VARCHAR},
+      </if>
+      <if test="sensorAccuracy != null">
+        #{sensorAccuracy,jdbcType=VARCHAR},
+      </if>
+      <if test="productDate != null">
+        #{productDate,jdbcType=DATE},
+      </if>
+      <if test="endDate != null">
+        #{endDate,jdbcType=DATE},
+      </if>
+      <if test="sensorStatus != null">
+        #{sensorStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

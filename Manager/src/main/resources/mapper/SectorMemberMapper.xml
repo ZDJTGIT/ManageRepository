@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zdjc.mapper.SectorMemberMapper">
+  <resultMap id="BaseResultMap" type="com.zdjc.entity.SectorMember">
+    <result column="se_id" jdbcType="INTEGER" property="seId" />
+    <result column="sector_id" jdbcType="INTEGER" property="sectorId" />
+    <result column="member_id" jdbcType="INTEGER" property="memberId" />
+    <result column="sector_role" jdbcType="INTEGER" property="sectorRole" />
+  </resultMap>
+  <insert id="insert" parameterType="com.zdjc.entity.SectorMember">
+    insert into sector_member (se_id, sector_id, member_id, 
+      sector_role)
+    values (#{seId,jdbcType=INTEGER}, #{sectorId,jdbcType=INTEGER}, #{memberId,jdbcType=INTEGER}, 
+      #{sectorRole,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zdjc.entity.SectorMember">
+    insert into sector_member
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="seId != null">
+        se_id,
+      </if>
+      <if test="sectorId != null">
+        sector_id,
+      </if>
+      <if test="memberId != null">
+        member_id,
+      </if>
+      <if test="sectorRole != null">
+        sector_role,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="seId != null">
+        #{seId,jdbcType=INTEGER},
+      </if>
+      <if test="sectorId != null">
+        #{sectorId,jdbcType=INTEGER},
+      </if>
+      <if test="memberId != null">
+        #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="sectorRole != null">
+        #{sectorRole,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

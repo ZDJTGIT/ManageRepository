@@ -14,6 +14,12 @@
     <result column="sector_description" jdbcType="VARCHAR" property="sectorDescription" />
     <result column="sector_status" jdbcType="INTEGER" property="sectorStatus" />
   </resultMap>
+  <sql id="base_list">
+  	sector_id, project_id, sector_name, 
+    sector_type, sector_address, sector_longitude, 
+    sector_latitude, sector_begin_time, sector_end_time, 
+    sector_description, sector_status
+  </sql>
   <insert id="insert" parameterType="com.zdjc.entity.Sector">
     insert into sector (sector_id, project_id, sector_name, 
       sector_type, sector_address, sector_longitude, 
@@ -97,4 +103,40 @@
       </if>
     </trim>
   </insert>
+  <select id="querySubwaySectors" resultMap="BaseResultMap">
+  	select <include refid="base_list" /> from sector where sector_type = 11
+  </select>
+  <update id="updateSector" parameterType="com.zdjc.entity.Sector">
+    update sector
+    <set>
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="sectorName != null">
+        sector_name = #{sectorName,jdbcType=VARCHAR},
+      </if>
+      <if test="sectorAddress != null">
+        sector_address = #{sectorAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="sectorLongitude != null">
+        sector_longitude = #{sectorLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="sectorLatitude != null">
+        sector_latitude = #{sectorLatitude,jdbcType=VARCHAR},
+      </if>
+      <if test="sectorBeginTime != null">
+        sector_begin_time = #{sectorBeginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sectorEndTime != null">
+        sector_end_time = #{sectorEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sectorDescription != null">
+        sector_description = #{sectorDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="sectorStatus != null">
+      	sector_status = #{sectorStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where sector_id = #{sectorId,jdbcType=INTEGER}
+  </update>
 </mapper>

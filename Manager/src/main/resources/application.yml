@@ -3,14 +3,13 @@ server:
   
 spring:
   datasource:
-    # url: jdbc:mysql://123.207.88.210:3306/monitor?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
-    # driver-class-name: com.mysql.cj.jdbc.Driver
-    # username: znyjy
-    # password: zdjc@znyjy
-    url: jdbc:mysql://localhost:3306/manager3?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: root
+    url: jdbc:mysql://123.207.88.210:3306/monitor?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    username: znyjy
+    password: zdjc@znyjy
+    # url: jdbc:mysql://localhost:3306/manager3?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    # username: root
+    # password: root
   devtools:
     livereload:
       enabled: true
@@ -28,3 +27,5 @@ com:
     projectStatusTypeCode: 1
     # 区间角色对应字典系统编码
     sectorRoleTypeCode: 2
+    # 地铁对应s'cID
+    sectorType: 11

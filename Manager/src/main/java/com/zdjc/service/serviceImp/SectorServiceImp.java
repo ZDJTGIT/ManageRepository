@@ -14,6 +14,7 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import com.zdjc.entity.AlarmLinkman;
 import com.zdjc.entity.Member;
 import com.zdjc.entity.Result;
+import com.zdjc.entity.Sector;
 import com.zdjc.entity.SysCode;
 import com.zdjc.entity.UserSector;
 import com.zdjc.mapper.AlarmLinkmanMapper;
@@ -27,6 +28,8 @@ import com.zdjc.mapper.UserSectorMapper;
 import com.zdjc.service.SectorService;
 import com.zdjc.vo.SectorAndLinkMan;
 import com.zdjc.vo.UserVO;
+import com.zdjc.vo.subway.sector.AddSectorVO;
+import com.zdjc.vo.subway.sector.UpdateSectorVO;
 
 @Service
 @Transactional
@@ -61,6 +64,9 @@ public class SectorServiceImp implements SectorService {
 	
 	@Value("${com.manager.sectorRoleTypeCode}")
 	private Integer sercorRoleTypeCode;
+	
+	@Value("${com.manager.sectorType}")
+	private Integer sectorType;
 	
 	@Override
 	public Result<Map<String, Object>> getBase() {
@@ -112,11 +118,6 @@ public class SectorServiceImp implements SectorService {
 				record.setSectorId(pojo.getSectorId());
 				record.setStatus(1);
 				alarmLinkmanMapper.insertSelective(record);
-//			SectorMember sectorMember = new SectorMember();
-//			sectorMember.setMemberId(integer);
-//			sectorMember.setSectorId(pojo.getSectorId());
-//			sectorMember.setSectorRole(11);
-//			sectorMemberMapper.insertSelective(sectorMember);
 			}
 			return new Result<String>().success("新增区间成功");
 		} catch (Exception e) {
@@ -124,5 +125,27 @@ public class SectorServiceImp implements SectorService {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			return new Result<String>().failure("新增区间失败");
 		}
+	}
+	@Override
+	public Result<List<Sector>> getSubwaySectors() {
+		List<Sector> subaySectorList = sectorMapper.querySubwaySectors();
+		return new Result<List<Sector>>().success("查询所有 ", subaySectorList);
+	}
+	
+	@Override
+	public Result<String> addSubwaySector(AddSectorVO entity) {
+		entity.setSectorType(sectorType);
+		if(sectorMapper.insert(entity)>0) {
+			return new Result<String>().success("新增区间成功");
+		}
+		return new Result<String>().failure("新增区间失败");
+	}
+	
+	@Override
+	public Result<String> updateSubwaySector(UpdateSectorVO entity) {
+		if(sectorMapper.updateSector(entity)>0) {
+			return new Result<String>().success("修改区间成功");
+		}
+		return new Result<String>().failure("修改区间失败");
 	}
 }

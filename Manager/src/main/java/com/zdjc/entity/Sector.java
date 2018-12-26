@@ -4,6 +4,16 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+/**
+ * @author KStar--1143574134@qq.com
+ *
+ * @data 2018年12月24日 下午3:40:43
+ */
+/**
+ * @author KStar--1143574134@qq.com
+ *
+ * @data 2018年12月25日 上午9:14:29
+ */
 public class Sector {
     private Integer sectorId;
 
@@ -116,4 +126,16 @@ public class Sector {
     public void setSectorStatus(Integer sectorStatus) {
         this.sectorStatus = sectorStatus;
     }
+
+	@Override
+	public String toString() {
+		return "Sector [sectorId=" + sectorId + ", projectId=" + projectId + ", sectorName=" + sectorName
+				+ ", sectorType=" + sectorType + ", sectorAddress=" + sectorAddress + ", sectorLongitude="
+				+ sectorLongitude + ", sectorLatitude=" + sectorLatitude + ", sectorBeginTime=" + sectorBeginTime
+				+ ", sectorEndTime=" + sectorEndTime + ", sectorDescription=" + sectorDescription + ", sectorStatus="
+				+ sectorStatus + "]";
+	}
+    
+    
+
 }

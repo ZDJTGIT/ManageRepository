@@ -50,4 +50,19 @@
   <delete id="deleteProject" parameterType="com.zdjc.entity.Project">
   	delete from project where project_id = #{projectId,jdbcType=INTEGER}
   </delete>
+  <update id="update" parameterType="com.zdjc.entity.Project">
+  	update project
+    <set>
+      <if test="projectName != null">
+        project_name = #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="projectAddress != null">
+        project_address = #{projectAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="projectDescription != null">
+        project_description = #{projectDescription,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where project_id = #{projectId,jdbcType=INTEGER}
+  </update>
 </mapper>

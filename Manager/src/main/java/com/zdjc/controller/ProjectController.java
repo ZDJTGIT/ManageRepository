@@ -35,4 +35,9 @@ public class ProjectController {
 	public Result<String> deleteProject(@RequestBody Project pro){
 		return projectService.deleteProject(pro);
 	}
+	
+	@PostMapping("/updateProject")
+	public Result<String> updateProject(@RequestBody Project pro){
+		return projectService.updateProject(pro);
+	}
 }
